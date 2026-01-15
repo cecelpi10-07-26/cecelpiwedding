@@ -1,0 +1,104 @@
+:root {
+  --pearl-white: #FAF9F6;
+  --nav-text: #222222;
+  --panel-bg: rgba(255,255,255,0.95);
+  --panel-border: rgba(0,0,0,0.12);
+  --shadow: 0 18px 50px rgba(0,0,0,0.08);
+  --btn-bg: rgba(255,255,255,0.95);
+  --btn-border: rgba(0,0,0,0.20);
+  --btn-hover: rgba(0,0,0,0.05);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+
+body {
+  color: #222;
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
+  background: var(--pearl-white);
+  background-attachment: fixed;
+}
+
+/* Navbar (comune) */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px clamp(14px, 4vw, 28px);
+  background: var(--pearl-white);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  background: var(--pearl-white);
+  color: #222222;
+  border: 2px solid #222222;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.navlinks {
+  display: flex;
+  gap: clamp(10px, 3vw, 22px);
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+}
+
+.navlinks a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: background .2s ease, transform .1s;
+  white-space: nowrap;
+}
+
+.navlinks a:hover { background: rgba(0,0,0,0.08); }
+.navlinks a:active { transform: translateY(1px); }
+
+/* Mobile: navbar scorre orizzontalmente (evita overflow) */
+@media (max-width: 900px) {
+  .navlinks {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+    max-width: calc(100vw - 88px);
+  }
+  .navlinks::-webkit-scrollbar { height: 6px; }
+  .navlinks::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.15);
+    border-radius: 999px;
+  }
+}
+
+/* Utility */
+.muted { color: #666; }
+
+/* Footer (molte pagine lo ridefiniscono, ma tenerlo qui aiuta index.html) */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 12px;
+  opacity: 0.6;
+  color: #666;
+}
+
+/* Cursori: se in futuro vuoi un cursore custom (SVG/PNG), aggiungilo qui */
+a, button { cursor: pointer; }

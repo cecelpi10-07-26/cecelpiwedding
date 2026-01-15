@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elpidio & Cecilia — Wedding</title>
+  <meta name="description" content="Sito del matrimonio di Elpidio & Cecilia" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Marcellus&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+  
+  <!-- CSS Comune con cursore personalizzato -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* SOLO GLI STILI UNICI DELLA HOMEPAGE */
+    
+    /* HERO - NO SCROLL */
+    .hero { 
+      height: 100vh; 
+      display: grid; 
+      place-items: center; 
+      padding: 0 20px;
+      overflow: hidden;
+    }
+    .hero-content {
+      text-align: center;
+    }
+    .couple-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 10vw, 120px);
+      font-weight: 700;
+      margin: 0;
+      color: #111111;
+      white-space: nowrap;
+    }
+    .subtitle {
+      font-size: clamp(15px, 2.4vw, 22px);
+      color: #555555; 
+      margin: 6px 0 0;
+    }
+
+    /* SECTIONS (se le vuoi mantenere) */
+    .section {
+      width: min(1100px, 92vw);
+      margin: 40px auto;
+      padding: clamp(20px, 4vw, 40px);
+      border-radius: 24px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel-bg);
+      box-shadow: var(--shadow);
+      color: #333333;
+      scroll-margin-top: 110px;
+    }
+    .section h2 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: clamp(26px, 4.2vw, 42px); 
+      margin: 0 0 12px; 
+      color: #111111; 
+    }
+    
+    /* MAPPA */
+    .map-grid { 
+      display: grid; 
+      gap: 16px; 
+      grid-template-columns: 1fr; 
+    }
+    @media (min-width: 900px) { 
+      .map-grid { 
+        grid-template-columns: 1fr 1fr; 
+      } 
+    }
+    .map-card {
+      background: rgba(255,255,255,0.98); 
+      color: #111111;
+      border-radius: 18px; 
+      padding: 12px; 
+      border: 1px solid rgba(0,0,0,0.08); 
+      box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    }
+    .map-card h3 { 
+      margin: 6px 0 10px; 
+      font-family: 'Marcellus', serif; 
+      color: #111111; 
+    }
+    .map-card p { 
+      margin: 8px 0 12px; 
+      color: #444; 
+    }
+    .map-card iframe { 
+      width: 100%; 
+      height: 280px; 
+      border: 0; 
+      border-radius: 12px; 
+    }
+
+    /* BACK-TO-TOP */
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.9);
+      color: #222;
+      font-weight: 800;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease, visibility .2s;
+      z-index: 1200;
+    }
+    .back-to-top.show { 
+      opacity: 1; 
+      visibility: visible; 
+      transform: translateY(0); 
+    }
+    .back-to-top:hover { 
+      background: rgba(255,255,255,1); 
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- NAVBAR (stile da style.css) -->
+  <nav class="nav">
+    <div class="logo-badge" aria-label="Logo E e C">E&amp;C</div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="cerimonia.html">Cerimonia</a>
+      <a href="ricevimento.html">Ricevimento</a>
+      <a href="mappa.html">Mappa</a>
+      <a href="lista-nozze.html">Lista Nozze</a>
+      <a href="rsvp.html">RSVP</a>
+      <a href="storia.html">Storia</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contatti.html">Contatti</a>
+      <a href="upload.html">Upload Foto</a>
+    </div>
+  </nav>
+
+  <!-- HERO - NO SCROLL -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1 class="couple-name">Elpidio&nbsp;&amp;&nbsp;Cecilia</h1>
+      <p class="subtitle">Sito in costruzione — foto e dettagli in arrivo</p>
+    </div>
+  </header>
+
+  <!-- SEZIONI (opzionali, se le vuoi mantenere) -->
+  <!--
+  <section id="cerimonia" class="section">
+    <h2>Cerimonia</h2>
+    <p class="muted">Data e ora: <strong>—</strong> • Luogo: <strong>—</strong></p>
+    <p>Note per gli invitati: <em>in aggiornamento</em>.</p>
+  </section>
+
+  <section id="ricevimento" class="section">
+    <h2>Ricevimento</h2>
+    <p class="muted">Orario di inizio: <strong>—</strong> • Location: <strong>—</strong></p>
+    <p>Programma indicativo: <em>in aggiornamento</em>.</p>
+  </section>
+
+  <section id="mappa" class="section">
+    <h2>Mappa</h2>
+    <div class="map-grid">
+      <div class="map-card">
+        <h3>Chiesa</h3>
+        <p>Indirizzo: <em>inserisci qui l'indirizzo</em></p>
+        <iframe title="Mappa chiesa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996!2d14.2681!3d40.8518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDUxJzYuNSJOIDE0wrAxNicwNS4xIkU!5e0!3m2!1sit!2sit!4v0000000000000" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="map-card">
+        <h3>Villa / Ristorante</h3>
+        <p>Indirizzo: <em>inserisci qui l'indirizzo</em></p>
+        <iframe title="Mappa villa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996!2d14.2681!3d40.8518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDUxJzYuNSJOIDE0wrAxNicwNS.1IkU!5e0!3m2!1sit!2sit!4v0000000000000" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <footer>© <span id="year"></span> Elpidio &amp; Cecilia</footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="backToTop" aria-label="Torna all'inizio" title="Torna su">▲</button>
+
+  <script>
+    // Anno corrente
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Back to top
+    const backBtn = document.getElementById('backToTop');
+    const toggleBackBtn = () => {
+      if (!backBtn) return;
+      if (window.scrollY > 300) backBtn.classList.add('show');
+      else backBtn.classList.remove('show');
+    };
+    toggleBackBtn();
+    window.addEventListener('scroll', toggleBackBtn);
+    if (backBtn) backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
