@@ -5,16 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RSVP — Elpidio & Cecilia</title>
   <meta name="description" content="Conferma presenza al matrimonio di Elpidio e Cecilia" />
-  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
-  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <meta name="robots" content="noindex, nofollow" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Marcellus&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 
-  
-  <!-- CSS Comune -->
-  <link rel="stylesheet" href="style.css">
-<style>
+  <style>
     :root {
       --pearl-white: #FAF9F6;
       --nav-text: #222222;
@@ -27,6 +23,7 @@
       --success-color: #2e7d32;
       --success-bg: rgba(46, 125, 50, 0.1);
     }
+
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
     body {
@@ -36,6 +33,56 @@
       background-attachment: fixed;
     }
 
+    /* NAVBAR */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px clamp(14px, 4vw, 28px);
+      background: var(--pearl-white);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      gap: 14px;
+    }
+    .logo-badge {
+      width: 56px; height: 56px; border-radius: 18px;
+      display: grid; place-items: center;
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;
+      background: var(--pearl-white);
+      color: #222222;
+      border: 2px solid #222222;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+      user-select: none;
+      flex: 0 0 auto;
+    }
+    .navlinks {
+      display: flex; gap: clamp(8px, 2vw, 18px); align-items: center;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+    .navlinks a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: background .2s ease, transform .1s;
+      white-space: nowrap;
+    }
+    .navlinks a:hover { background: rgba(0,0,0,0.08); }
+    .navlinks a:active { transform: translateY(1px); }
+
+    /* Mobile: nav scrollabile (piu' usabile su telefono) */
+    @media (max-width: 860px) {
+      .navlinks {
+        overflow-x: auto;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+      }
+      .navlinks::-webkit-scrollbar { display: none; }
+    }
 
     /* MAIN CONTENT */
     .container {
@@ -47,12 +94,12 @@
       background: var(--panel-bg);
       border: 1px solid var(--panel-border);
       border-radius: 24px;
-      padding: clamp(30px, 5vw, 50px);
+      padding: clamp(26px, 5vw, 50px);
       box-shadow: var(--shadow);
     }
     .rsvp-card h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 5vw, 48px);
+      font-size: clamp(34px, 5vw, 48px);
       margin: 0 0 10px;
       color: #111111;
       text-align: center;
@@ -60,27 +107,26 @@
     .rsvp-subtitle {
       text-align: center;
       color: #666;
-      margin-bottom: 40px;
-      font-size: 18px;
+      margin-bottom: 34px;
+      font-size: 16px;
+      line-height: 1.4;
     }
     .form-container {
-      max-width: 600px;
+      max-width: 640px;
       margin: 0 auto;
     }
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
+      gap: 18px;
+      margin-bottom: 18px;
     }
-    @media (max-width: 600px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 650px) {
+      .container { padding: 0 14px; }
+      .form-row { grid-template-columns: 1fr; gap: 14px; }
     }
-    .form-group {
-      margin-bottom: 20px;
-    }
+
+    .form-group { margin-bottom: 18px; }
     .form-group label {
       display: block;
       font-weight: 700;
@@ -91,16 +137,19 @@
       content: " *";
       color: #d32f2f;
     }
+
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 12px 16px;
+      padding: 14px 16px;
       border-radius: 12px;
       border: 1px solid rgba(0,0,0,0.15);
       font-family: inherit;
-      font-size: 16px;
+      font-size: 16px; /* evita zoom su iOS */
+      line-height: 1.2;
       transition: border 0.2s ease;
+      background: #fff;
     }
     .form-group input:focus,
     .form-group select:focus,
@@ -112,6 +161,15 @@
       min-height: 120px;
       resize: vertical;
     }
+
+    .help {
+      color: #666;
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
     .submit-btn {
       display: block;
       width: 100%;
@@ -125,21 +183,20 @@
       cursor: pointer;
       box-shadow: 0 8px 20px rgba(0,0,0,0.05);
       transition: all 0.2s ease;
-      margin-top: 30px;
+      margin-top: 26px;
+      min-height: 52px; /* tap target */
     }
     .submit-btn:hover:not(:disabled) {
       transform: translateY(-2px);
       background: var(--btn-hover);
       box-shadow: 0 12px 25px rgba(0,0,0,0.1);
     }
-    .submit-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
     .back-btn {
       display: block;
       width: fit-content;
-      margin: 30px auto 0;
+      margin: 22px auto 0;
       padding: 12px 24px;
       border-radius: 999px;
       border: 1px solid var(--btn-border);
@@ -156,36 +213,32 @@
       background: var(--btn-hover);
       box-shadow: 0 12px 25px rgba(0,0,0,0.1);
     }
+
     .success-message {
       background: var(--success-bg);
       border: 1px solid var(--success-color);
       border-radius: 12px;
-      padding: 20px;
-      margin-top: 20px;
+      padding: 18px;
+      margin-top: 18px;
       text-align: center;
       display: none;
     }
-    .success-message.show {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
-    .success-message h3 {
-      color: var(--success-color);
-      margin-top: 0;
-    }
+    .success-message.show { display: block; animation: fadeIn 0.35s ease; }
+    .success-message h3 { color: var(--success-color); margin-top: 0; }
+
     .error-message {
       color: #d32f2f;
       font-size: 14px;
-      margin-top: 5px;
+      margin-top: 6px;
       display: none;
     }
-    .error-message.show {
-      display: block;
-    }
+    .error-message.show { display: block; }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     footer {
       text-align: center;
       padding: 30px 20px;
@@ -194,6 +247,8 @@
       color: #666;
     }
 
+    /* form invisibile/iframe */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   </style>
 </head>
 <body>
@@ -207,11 +262,11 @@
       <a href="ricevimento.html">Ricevimento</a>
       <a href="mappa.html">Mappa</a>
       <a href="lista-nozze.html">Lista Nozze</a>
-      <a href="rsvp.html">RSVP</a>
+      <a href="rsvp.html" aria-current="page">RSVP</a>
       <a href="storia.html">Storia</a>
       <a href="gallery.html">Gallery</a>
       <a href="contatti.html">Contatti</a>
-      <a href="upload.html" class="nav-upload">Upload Foto</a>
+      <a href="upload.html">Upload Foto</a>
     </div>
   </nav>
 
@@ -220,38 +275,32 @@
     <div class="rsvp-card">
       <h1>RSVP</h1>
       <p class="rsvp-subtitle">Conferma la tua presenza al nostro matrimonio</p>
-      
-      <div class="form-container">
-        <!-- FORM NETLIFY -->
-        <form name="rsvp" method="POST" data-netlify="true" id="rsvp-form" netlify-honeypot="bot-field">
-          <!-- Campo nascosto per Netlify -->
-          <input type="hidden" name="form-name" value="rsvp" />
-          <!-- Honeypot per spam -->
-          <p class="hidden">
-            <label>Non compilare questo se sei umano: <input name="bot-field" /></label>
-          </p>
 
+      <div class="form-container">
+        <!-- FORM VISIBILE (SITO) -->
+        <form id="rsvp-form" novalidate>
           <div class="form-row">
             <div class="form-group required">
               <label for="nome">Nome</label>
-              <input type="text" id="nome" name="nome" required placeholder="Il tuo nome">
+              <input type="text" id="nome" name="nome" required placeholder="Il tuo nome" autocomplete="given-name" enterkeyhint="next">
               <div class="error-message" id="nome-error">Il nome è obbligatorio</div>
             </div>
             <div class="form-group required">
               <label for="cognome">Cognome</label>
-              <input type="text" id="cognome" name="cognome" required placeholder="Il tuo cognome">
+              <input type="text" id="cognome" name="cognome" required placeholder="Il tuo cognome" autocomplete="family-name" enterkeyhint="next">
               <div class="error-message" id="cognome-error">Il cognome è obbligatorio</div>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="nome@esempio.com">
+              <label for="email">Email (opzionale)</label>
+              <input type="email" id="email" name="email" placeholder="nome@esempio.com" autocomplete="email" inputmode="email" enterkeyhint="next">
+              <div class="error-message" id="email-error">Email non valida</div>
             </div>
             <div class="form-group">
               <label for="telefono">Telefono (opzionale)</label>
-              <input type="tel" id="telefono" name="telefono" placeholder="+39 123 456 7890">
+              <input type="tel" id="telefono" name="telefono" placeholder="+39 123 456 7890" autocomplete="tel" inputmode="tel" enterkeyhint="next">
             </div>
           </div>
 
@@ -259,49 +308,57 @@
             <label for="persone">Numero di persone</label>
             <select id="persone" name="persone" required>
               <option value="" disabled selected>Seleziona il numero</option>
-              <option value="1">1 persona (solo io)</option>
-              <option value="2">2 persone (io + 1 accompagnatore)</option>
-              <option value="3">3 persone</option>
-              <option value="4">4 persone</option>
-              <option value="5">5 persone</option>
-              <option value="6">6 o più persone</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
             </select>
             <div class="error-message" id="persone-error">Seleziona il numero di persone</div>
           </div>
 
-          <div class="form-group">
-            <label for="partecipazione">Parteciperai a:</label>
-            <select id="partecipazione" name="partecipazione">
-              <option value="entrambi">Entrambi (cerimonia e ricevimento)</option>
-              <option value="solo-cerimonia">Solo cerimonia</option>
-              <option value="solo-ricevimento">Solo ricevimento</option>
-              <option value="non-sicuro">Non sono ancora sicuro</option>
+          <div class="form-group required">
+            <label for="partecipazione">Parteciperai a</label>
+            <select id="partecipazione" name="partecipazione" required>
+              <option value="" disabled selected>Seleziona un'opzione</option>
+              <option value="Cerimonia e Ricevimento">Cerimonia e Ricevimento</option>
+              <option value="Solo ricevimento">Solo ricevimento</option>
+              <option value="Solo cerimonia">Solo cerimonia</option>
             </select>
+            <div class="error-message" id="partecipazione-error">Seleziona la partecipazione</div>
           </div>
 
           <div class="form-group">
-            <label for="note">Note speciali</label>
-            <textarea id="note" name="note" placeholder="Intolleranze alimentari, preferenze dietetiche, messaggio per gli sposi..."></textarea>
-            <small style="color: #666; display: block; margin-top: 5px;">Esempio: vegetariano, allergie, bambini piccoli, ecc.</small>
+            <label for="note">Note speciali (allergie/intolleranze)</label>
+            <textarea id="note" name="note" placeholder="Intolleranze alimentari, preferenze dietetiche, bambini piccoli, ecc." autocomplete="off"></textarea>
           </div>
 
           <div class="form-group">
-            <label for="messaggio">Un messaggio per noi (opzionale)</label>
-            <textarea id="messaggio" name="messaggio" placeholder="Scrivici qualcosa di speciale..."></textarea>
+            <label for="messaggio">Messaggio per gli sposi (opzionale)</label>
+            <textarea id="messaggio" name="messaggio" placeholder="Scrivici qualcosa di speciale..." autocomplete="off"></textarea>
+          </div>
+
+          <!-- Anti-spam semplice (campo nascosto) -->
+          <div class="sr-only" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
           </div>
 
           <button type="submit" class="submit-btn" id="submit-btn">
             <span id="btn-text">Invia Conferma</span>
-            <span id="btn-loading" style="display: none;">Invio in corso...</span>
+            <span id="btn-loading" style="display:none;">Invio in corso...</span>
           </button>
         </form>
 
         <!-- MESSAGGIO SUCCESSO -->
-        <div class="success-message" id="success-message">
-          <h3>✅ Conferma inviata con successo!</h3>
-          <p>Grazie <span id="success-name"></span> per aver confermato la tua presenza!</p>
-          <p>Riceverai una conferma via email a breve.</p>
-          <p><small>Hai bisogno di modificare la tua conferma? <a href="mailto:elpidiocecilia@example.com">Scrivici</a></small></p>
+        <div class="success-message" id="success-message" role="status" aria-live="polite">
+          <h3>Conferma inviata con successo</h3>
+          <p>Grazie <strong><span id="success-name"></span></strong> per aver confermato la tua presenza.</p>
         </div>
 
         <a href="index.html" class="back-btn">← Torna alla Home</a>
@@ -311,14 +368,25 @@
 
   <footer>© <span id="year"></span> Elpidio &amp; Cecilia</footer>
 
+  <!-- IFRAME nascosto per invio Google Forms (evita CORS e non porta via dalla pagina) -->
+  <iframe id="gf-iframe" name="gf-iframe" class="sr-only" title="Invio RSVP" aria-hidden="true"></iframe>
+
+  <!-- FORM nascosto: qui mettiamo gli entry.* del Google Form -->
+  <form id="gf-form" class="sr-only" method="POST" target="gf-iframe" action="https://docs.google.com/forms/d/e/1FAIpQLSetEMlIdiONOtjCuF9BZ8EZt8KKcsU4afwggASHNcQRDoukCg/formResponse">
+    <input type="text" name="entry.738591272" id="gf_nome">
+    <input type="text" name="entry.1275687098" id="gf_cognome">
+    <input type="text" name="entry.959844416" id="gf_email">
+    <input type="text" name="entry.281060993" id="gf_telefono">
+    <input type="text" name="entry.1192058120" id="gf_persone">
+    <input type="text" name="entry.579231647" id="gf_partecipazione">
+    <textarea name="entry.605281712" id="gf_note"></textarea>
+    <textarea name="entry.1427081091" id="gf_messaggio"></textarea>
+  </form>
+
   <script>
     // Anno corrente nel footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Nascondi il campo honeypot
-    document.querySelector('.hidden').style.display = 'none';
-
-    // Gestione del form Netlify
     const form = document.getElementById('rsvp-form');
     const submitBtn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
@@ -326,28 +394,33 @@
     const successMessage = document.getElementById('success-message');
     const successName = document.getElementById('success-name');
 
+    const gfForm = document.getElementById('gf-form');
+    const gfIframe = document.getElementById('gf-iframe');
+
+    let pendingSubmit = false;
+
     // Validazione in tempo reale
     const inputs = form.querySelectorAll('input, select, textarea');
     inputs.forEach(input => {
       input.addEventListener('blur', () => validateField(input));
       input.addEventListener('input', () => clearError(input));
+      input.addEventListener('change', () => clearError(input));
     });
 
     function validateField(field) {
       const errorElement = document.getElementById(`${field.id}-error`);
-      if (!errorElement) return;
-      
-      if (field.hasAttribute('required') && !field.value.trim()) {
+      if (!errorElement) return true;
+
+      if (field.hasAttribute('required') && !String(field.value || '').trim()) {
         errorElement.classList.add('show');
         return false;
       }
-      
+
       if (field.type === 'email' && field.value && !isValidEmail(field.value)) {
-        errorElement.textContent = 'Email non valida';
         errorElement.classList.add('show');
         return false;
       }
-      
+
       errorElement.classList.remove('show');
       return true;
     }
@@ -361,73 +434,103 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      btnText.style.display = isLoading ? 'none' : 'inline';
+      btnLoading.style.display = isLoading ? 'inline' : 'none';
+    }
+
+    function showSuccess(nome) {
+      successName.textContent = nome || '';
+      successMessage.classList.add('show');
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // nascondi dopo un po'
+      setTimeout(() => successMessage.classList.remove('show'), 8000);
+    }
+
+    // Quando l'iframe carica dopo il POST, consideriamo la submission completata
+    gfIframe.addEventListener('load', () => {
+      if (!pendingSubmit) return;
+      pendingSubmit = false;
+      setLoading(false);
+
+      const nome = document.getElementById('nome').value.trim();
+      showSuccess(nome);
+
+      // Reset form e bozza
+      form.reset();
+      localStorage.removeItem('rsvpDraft');
+    });
+
     // Invio del form
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
+      // honeypot anti-spam
+      const honeypot = document.getElementById('website');
+      if (honeypot && honeypot.value) {
+        // bot: ignora
+        return;
+      }
+
       // Validazione finale
       let isValid = true;
       const requiredFields = form.querySelectorAll('[required]');
       requiredFields.forEach(field => {
         if (!validateField(field)) isValid = false;
       });
-      
+
+      // Email: valida solo se presente
+      const emailField = document.getElementById('email');
+      if (emailField && emailField.value && !isValidEmail(emailField.value)) {
+        const err = document.getElementById('email-error');
+        if (err) err.classList.add('show');
+        isValid = false;
+      }
+
       if (!isValid) {
         alert('Per favore, compila tutti i campi obbligatori (*)');
         return;
       }
 
-      // Mostra "Invio in corso..."
-      submitBtn.disabled = true;
-      btnText.style.display = 'none';
-      btnLoading.style.display = 'inline';
+      // Popola il form nascosto (Google Forms)
+      document.getElementById('gf_nome').value = document.getElementById('nome').value.trim();
+      document.getElementById('gf_cognome').value = document.getElementById('cognome').value.trim();
+      document.getElementById('gf_email').value = (document.getElementById('email').value || '').trim();
+      document.getElementById('gf_telefono').value = (document.getElementById('telefono').value || '').trim();
+      document.getElementById('gf_persone').value = document.getElementById('persone').value;
+      document.getElementById('gf_partecipazione').value = document.getElementById('partecipazione').value;
+      document.getElementById('gf_note').value = (document.getElementById('note').value || '').trim();
+      document.getElementById('gf_messaggio').value = (document.getElementById('messaggio').value || '').trim();
 
-      try {
-        // Netlify gestisce l'invio automaticamente
-        // Possiamo usare fetch per un'esperienza migliore
-        const formData = new FormData(form);
-        
-        // Invia a Netlify
-        const response = await fetch('/rsvp.html', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString()
-        });
+      // Invio
+      pendingSubmit = true;
+      setLoading(true);
 
-        if (response.ok) {
-          // Successo!
-          const nome = document.getElementById('nome').value;
-          successName.textContent = nome;
-          successMessage.classList.add('show');
-          form.reset();
-          
-          // Scrolla al messaggio di successo
-          successMessage.scrollIntoView({ behavior: 'smooth' });
-          
-          // Dopo 5 secondi, nascondi il messaggio
-          setTimeout(() => {
-            successMessage.classList.remove('show');
-          }, 8000);
-        } else {
-          throw new Error('Errore nell\'invio');
-        }
-      } catch (error) {
-        // Fallback: usa il submit normale
-        console.log('Usando submit standard...');
-        form.submit();
-      } finally {
-        // Ripristina pulsante
-        submitBtn.disabled = false;
-        btnText.style.display = 'inline';
-        btnLoading.style.display = 'none';
-      }
+      // Submit reale su Google Forms
+      gfForm.submit();
+
+      // Fallback: se l'iframe non scatta (raro), mostriamo comunque conferma dopo 2.5s
+      setTimeout(() => {
+        if (!pendingSubmit) return;
+        pendingSubmit = false;
+        setLoading(false);
+        const nome = document.getElementById('nome').value.trim();
+        showSuccess(nome);
+        form.reset();
+        localStorage.removeItem('rsvpDraft');
+      }, 2500);
     });
 
-    // Salva bozza in localStorage (facoltativo)
+    // Salva bozza in localStorage
     form.addEventListener('input', function() {
       const formData = {};
       inputs.forEach(input => {
-        if (input.name) formData[input.name] = input.value;
+        if (!input.name) return;
+        // non salvare honeypot
+        if (input.name === 'website') return;
+        formData[input.name] = input.value;
       });
       localStorage.setItem('rsvpDraft', JSON.stringify(formData));
     });
@@ -435,11 +538,18 @@
     // Ripristina bozza al caricamento
     window.addEventListener('load', function() {
       const draft = localStorage.getItem('rsvpDraft');
-      if (draft) {
+      if (!draft) return;
+      try {
         const formData = JSON.parse(draft);
         inputs.forEach(input => {
-          if (formData[input.name]) input.value = formData[input.name];
+          if (!input.name) return;
+          if (input.name === 'website') return;
+          if (Object.prototype.hasOwnProperty.call(formData, input.name)) {
+            input.value = formData[input.name];
+          }
         });
+      } catch (e) {
+        // ignore
       }
     });
   </script>
