@@ -1,11 +1,9 @@
-[file name]: upload.html
-[file content begin]
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-  <title>Carica le tue foto 📸 — Elpidio & Cecilia</title>
+  <title>Carica le tue foto & video 📸 — Elpidio & Cecilia</title>
   <meta name="description" content="Carica le tue foto del matrimonio" />
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
   <meta name="googlebot" content="noindex, nofollow" />
@@ -193,28 +191,25 @@
     <div class="logo-badge" aria-label="Logo E e C">E&amp;C</div>
     <div class="navlinks">
       <a href="index.html">Home</a>
-      <a href="cerimonia.html">Cerimonia</a>
-      <a href="ricevimento.html">Ricevimento</a>
-      <a href="mappa.html">Mappa</a>
+      <a href="cerimonia-ricevimento.html">Cerimonia & Ricevimento</a>
       <a href="lista-nozze.html">Lista Nozze</a>
       <a href="rsvp.html">RSVP</a>
-      <a href="storia.html">Storia</a>
+      <a href="storia.html">La nostra storia</a>
       <a href="gallery.html">Gallery</a>
       <a href="contatti.html">Contatti</a>
-      <a href="upload.html">Upload Foto</a>
     </div>
   </nav>
 
   <main class="card" aria-label="Carica foto">
-    <h1>Carica le tue foto 📸</h1>
+    <h1>Carica le tue foto & video 📸</h1>
     <p>Premi il bottone, scegli le foto dal telefono e inviale. Le immagini in HD andranno nell'album degli sposi.</p>
 
-    <button id="uploadBtn" class="btn">Carica foto</button>
+    <button id="uploadBtn" class="btn">Carica foto & video</button>
     <br />
-    <a class="link" href="index.html">← Torna al sito</a>
+    <a class="link" href="gallery.html">← Torna alla Gallery</a>
 
     <p class="muted">
-      Puoi selezionare più file (max 50 MB ciascuno). Formati: JPG/PNG/HEIC/WEBP.
+      Puoi selezionare più file (max 50 MB ciascuno). Formati: JPG/PNG/HEIC/WEBP/MP4/MOV.
     </p>
   </main>
 
@@ -248,7 +243,7 @@
         sources: ['local','camera'],
         multiple: true,
         maxFileSize: 50 * 1024 * 1024,     // 50MB per file
-        clientAllowedFormats: ['jpg','jpeg','png','heic','webp'],
+        clientAllowedFormats: ['jpg','jpeg','png','heic','webp','mp4','mov'],
         showAdvancedOptions: false,
         showPoweredBy: false,
         cropping: false,
@@ -267,13 +262,10 @@
 
         // Quando la coda è terminata (tutti i file processati)
         if (result && result.event === 'queues-end') {
-          alert('Grazie! Le tue foto sono state caricate ✅');
-          // Se vuoi tornare alla home automaticamente:
-          // window.location.href = 'index.html';
+          alert('Grazie! Le tue foto e video sono stati caricati ✅');
         }
       });
     });
   </script>
 </body>
 </html>
-[file content end]

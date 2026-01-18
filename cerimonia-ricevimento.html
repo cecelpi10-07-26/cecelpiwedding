@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <title>Cerimonia & Ricevimento — Elpidio & Cecilia</title>
+  <meta name="description" content="Dettagli della cerimonia e ricevimento di matrimonio" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <meta name="bingbot" content="noindex, nofollow" />
+  <meta name="slurp" content="noindex, nofollow" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Marcellus&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pearl-white: #FAF9F6;
+      --nav-text: #222222;
+      --panel-bg: rgba(255,255,255,0.95);
+      --panel-border: rgba(0,0,0,0.12);
+      --shadow: 0 18px 50px rgba(0,0,0,0.08);
+      --btn-bg: rgba(255,255,255,0.95);
+      --btn-border: rgba(0,0,0,0.20);
+      --btn-hover: rgba(0,0,0,0.05);
+      --map-btn: #4285F4;
+      --map-btn-hover: #3367D6;
+      --waze-btn: #33CCFF;
+      --apple-btn: #000000;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      color: #222;
+      font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background: var(--pearl-white);
+      background-attachment: fixed;
+    }
+    /* NAVBAR */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px clamp(14px, 4vw, 28px);
+      background: var(--pearl-white);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .logo-badge {
+      width: 56px; height: 56px; border-radius: 18px;
+      display: grid; place-items: center;
+      font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700;
+      background: var(--pearl-white);
+      color: #222222;
+      border: 2px solid #222222;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+      user-select: none;
+    }
+    .navlinks { display: flex; gap: clamp(10px, 3vw, 22px); align-items: center; }
+    .navlinks a {
+      color: var(--nav-text); text-decoration: none; font-weight: 700;
+      padding: 8px 10px; border-radius: 10px; transition: background .2s ease, transform .1s;
+    }
+    .navlinks a:hover { background: rgba(0,0,0,0.08); }
+    .navlinks a:active { transform: translateY(1px); }
+
+    /* MAIN CONTENT */
+    .container {
+      max-width: min(1200px, 92vw);
+      margin: 100px auto 40px;
+      padding: 0 20px;
+    }
+    .main-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 24px;
+      padding: clamp(30px, 5vw, 50px);
+      box-shadow: var(--shadow);
+    }
+    .main-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 48px);
+      margin: 0 0 10px;
+      color: #111111;
+      text-align: center;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 36px);
+      margin: 40px 0 20px;
+      color: #111111;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(0,0,0,0.08);
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 18px;
+    }
+    .info-grid {
+      display: grid;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    .info-item {
+      padding: 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .info-item h3 {
+      font-family: 'Marcellus', serif;
+      font-size: 20px;
+      margin: 0 0 10px;
+      color: #222;
+    }
+    .info-item p {
+      color: #444;
+      margin: 0 0 5px;
+      line-height: 1.6;
+    }
+    .info-item strong {
+      color: #111;
+    }
+    .timeline {
+      margin-top: 30px;
+    }
+    .timeline-item {
+      display: flex;
+      margin-bottom: 15px;
+      align-items: flex-start;
+    }
+    .timeline-time {
+      min-width: 80px;
+      font-weight: 700;
+      color: #222;
+    }
+    .timeline-desc {
+      flex: 1;
+      color: #444;
+    }
+    
+    /* MAP SECTION */
+    .maps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    @media (min-width: 900px) {
+      .maps-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .map-item {
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .map-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .map-header h3 {
+      font-family: 'Marcellus', serif;
+      font-size: 22px;
+      margin: 0 0 10px;
+      color: #222;
+    }
+    .map-header p {
+      color: #444;
+      margin: 0 0 5px;
+      line-height: 1.6;
+    }
+    .address {
+      font-family: monospace;
+      background: rgba(0,0,0,0.03);
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-size: 15px;
+    }
+    .map-container {
+      height: 300px;
+      position: relative;
+    }
+    .map-iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .map-actions {
+      padding: 15px 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--map-btn);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .nav-btn.google {
+      background: var(--map-btn);
+    }
+    .nav-btn.waze {
+      background: var(--waze-btn);
+    }
+    .nav-btn.apple {
+      background: var(--apple-btn);
+    }
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .nav-btn.google:hover { background: #3367D6; }
+    .nav-btn.waze:hover { background: #1AB2FF; }
+    .nav-btn.apple:hover { background: #333; }
+    .nav-btn.secondary {
+      background: transparent;
+      color: #222;
+      border: 1px solid rgba(0,0,0,0.15);
+    }
+    .nav-btn.secondary:hover {
+      background: rgba(0,0,0,0.05);
+    }
+    .nav-btn-icon {
+      font-size: 16px;
+    }
+    .info-note {
+      padding: 20px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    .info-note h3 {
+      font-family: 'Marcellus', serif;
+      font-size: 20px;
+      margin: 0 0 10px;
+      color: #222;
+    }
+    .info-note p {
+      color: #444;
+      margin: 0 0 10px;
+      line-height: 1.6;
+    }
+    
+    /* TABS per mobile map apps */
+    .map-apps-tabs {
+      display: none;
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 15px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .map-apps-tabs.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    .map-apps-tabs h4 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+    }
+    .app-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .back-btn {
+      display: block;
+      width: fit-content;
+      margin: 30px auto 0;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid var(--btn-border);
+      background: var(--btn-bg);
+      color: #222;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .back-btn:hover {
+      transform: translateY(-2px);
+      background: var(--btn-hover);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 12px;
+      opacity: 0.6;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="logo-badge" aria-label="Logo E e C">E&amp;C</div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="cerimonia-ricevimento.html">Cerimonia & Ricevimento</a>
+      <a href="lista-nozze.html">Lista Nozze</a>
+      <a href="rsvp.html">RSVP</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contatti.html">Contatti</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <div class="main-card">
+      <h1>Cerimonia & Ricevimento</h1>
+      <p class="subtitle">Tutti i dettagli per la nostra giornata speciale</p>
+      
+      <!-- CERIMONIA -->
+      <h2 class="section-title">Cerimonia</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>Data e Ora</h3>
+          <p><strong>Data:</strong> [Inserisci la data]</p>
+          <p><strong>Ora:</strong> [Inserisci l'ora]</p>
+          <p><strong>Durata prevista:</strong> Circa 1 ora</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Luogo</h3>
+          <p><strong>Chiesa/Basilica:</strong> [Nome della chiesa]</p>
+          <p><strong>Indirizzo:</strong> [Inserisci l'indirizzo completo]</p>
+          <p><strong>Città:</strong> [Città]</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Informazioni per gli invitati</h3>
+          <p><strong>Arrivo:</strong> Si consiglia di arrivare almeno 30 minuti prima dell'inizio della cerimonia.</p>
+          <p><strong>Parcheggio:</strong> [Informazioni sul parcheggio]</p>
+          <p><strong>Dress code:</strong> [Formale / Elegante / etc.]</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Programma</h3>
+          <p><strong>Accoglienza:</strong> Dalle [ora]</p>
+          <p><strong>Inizio cerimonia:</strong> [ora]</p>
+          <p><strong>Rito del matrimonio:</strong> [dettagli]</p>
+          <p><strong>Fine cerimonia:</strong> [ora]</p>
+          <p><strong>Foto di gruppo:</strong> Subito dopo la cerimonia</p>
+        </div>
+      </div>
+
+      <!-- RICEVIMENTO -->
+      <h2 class="section-title">Ricevimento</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>Location</h3>
+          <p><strong>Nome:</strong> [Nome della villa/ristorante]</p>
+          <p><strong>Indirizzo:</strong> [Inserisci l'indirizzo completo]</p>
+          <p><strong>Città:</strong> [Città]</p>
+          <p><strong>Tipologia:</strong> [Villa / Ristorante / Sala ricevimenti]</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Orari</h3>
+          <p><strong>Inizio ricevimento:</strong> [Ora]</p>
+          <p><strong>Arrivo degli ospiti:</strong> Dalle [ora]</p>
+          <p><strong>Fine prevista:</strong> [Ora]</p>
+        </div>
+
+        <div class="info-item">
+          <h3>Programma della serata</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-time">[Ora]</div>
+              <div class="timeline-desc">Arrivo degli ospiti e aperitivo di benvenuto</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">[Ora]</div>
+              <div class="timeline-desc">Ingresso in sala e presentazione degli sposi</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">[Ora]</div>
+              <div class="timeline-desc">Cena</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">[Ora]</div>
+              <div class="timeline-desc">Taglio della torta</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">[Ora]</div>
+              <div class="timeline-desc">Inizio ballo</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">[Ora]</div>
+              <div class="timeline-desc">Fine ricevimento</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <h3>Informazioni utili</h3>
+          <p><strong>Menu:</strong> [Tipo di menu: italiano, vegetariano, etc.]</p>
+          <p><strong>Intolleranze:</strong> Segnalare eventuali intolleranze nel modulo RSVP</p>
+          <p><strong>Parcheggio:</strong> [Disponibilità parcheggio]</p>
+          <p><strong>Servizio navetta:</strong> [Informazioni su eventuali navette]</p>
+        </div>
+      </div>
+
+      <!-- MAPPA -->
+      <h2 class="section-title">Mappa</h2>
+      <p class="subtitle">Trova facilmente i luoghi del nostro matrimonio</p>
+      
+      <div class="maps-grid">
+        <!-- CHIESA -->
+        <div class="map-item">
+          <div class="map-header">
+            <h3>📍 Chiesa di San Sisto</h3>
+            <p><strong>Orario cerimonia:</strong> [Inserisci l'ora, es: 15:30]</p>
+            <div class="address" id="chiesa-address">
+              Via S. Sisto, 9, 29121 Piacenza PC
+            </div>
+            <p><small>Basilica di San Sisto, Piacenza</small></p>
+          </div>
+          <div class="map-container">
+            <iframe 
+              class="map-iframe"
+              id="chiesa-map"
+              title="Mappa della chiesa di San Sisto"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Via+S.+Sisto,+9,+29121+Piacenza+PC&zoom=15">
+            </iframe>
+          </div>
+          <div class="map-actions">
+            <a href="#" class="nav-btn google" id="chiesa-google">
+              <span class="nav-btn-icon">🗺️</span> Google Maps
+            </a>
+            <a href="#" class="nav-btn waze" id="chiesa-waze">
+              <span class="nav-btn-icon">🚗</span> Waze
+            </a>
+            <a href="#" class="nav-btn apple" id="chiesa-apple">
+              <span class="nav-btn-icon">🍎</span> Apple Maps
+            </a>
+            <a href="#" class="nav-btn secondary" id="chiesa-copy">
+              <span class="nav-btn-icon">📋</span> Copia
+            </a>
+          </div>
+          <!-- Mobile apps selector (hidden by default) -->
+          <div class="map-apps-tabs" id="chiesa-apps-tabs">
+            <h4>Scegli l'app di navigazione:</h4>
+            <div class="app-buttons">
+              <a href="#" class="nav-btn google" data-address="Via S. Sisto, 9, 29121 Piacenza PC" data-app="google">
+                <span class="nav-btn-icon">🗺️</span> Google Maps
+              </a>
+              <a href="#" class="nav-btn waze" data-address="Via S. Sisto, 9, 29121 Piacenza PC" data-app="waze">
+                <span class="nav-btn-icon">🚗</span> Waze
+              </a>
+              <a href="#" class="nav-btn apple" data-address="Via S. Sisto, 9, 29121 Piacenza PC" data-app="apple">
+                <span class="nav-btn-icon">🍎</span> Apple Maps
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- VILLA/RICEVIMENTO -->
+        <div class="map-item">
+          <div class="map-header">
+            <h3>🏰 Location Ricevimento</h3>
+            <p><strong>Orario ricevimento:</strong> Dalle [Inserisci l'ora, es: 18:30]</p>
+            <div class="address" id="villa-address">
+              Via Guglielmo Marconi 2, Bordolano (CR)
+            </div>
+            <p><small>Location ricevimento a Bordolano</small></p>
+          </div>
+          <div class="map-container">
+            <iframe 
+              class="map-iframe"
+              id="villa-map"
+              title="Mappa della location del ricevimento"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Via+Guglielmo+Marconi+2,+Bordolano+CR&zoom=15">
+            </iframe>
+          </div>
+          <div class="map-actions">
+            <a href="#" class="nav-btn google" id="villa-google">
+              <span class="nav-btn-icon">🗺️</span> Google Maps
+            </a>
+            <a href="#" class="nav-btn waze" id="villa-waze">
+              <span class="nav-btn-icon">🚗</span> Waze
+            </a>
+            <a href="#" class="nav-btn apple" id="villa-apple">
+              <span class="nav-btn-icon">🍎</span> Apple Maps
+            </a>
+            <a href="#" class="nav-btn secondary" id="villa-copy">
+              <span class="nav-btn-icon">📋</span> Copia
+            </a>
+          </div>
+          <!-- Mobile apps selector (hidden by default) -->
+          <div class="map-apps-tabs" id="villa-apps-tabs">
+            <h4>Scegli l'app di navigazione:</h4>
+            <div class="app-buttons">
+              <a href="#" class="nav-btn google" data-address="Via Guglielmo Marconi 2, Bordolano (CR)" data-app="google">
+                <span class="nav-btn-icon">🗺️</span> Google Maps
+              </a>
+              <a href="#" class="nav-btn waze" data-address="Via Guglielmo Marconi 2, Bordolano (CR)" data-app="waze">
+                <span class="nav-btn-icon">🚗</span> Waze
+              </a>
+              <a href="#" class="nav-btn apple" data-address="Via Guglielmo Marconi 2, Bordolano (CR)" data-app="apple">
+                <span class="nav-btn-icon">🍎</span> Apple Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-note">
+        <h3>ℹ️ Informazioni utili</h3>
+        <p><strong>🚗 Distanza tra i luoghi:</strong> Circa 40 km - 45 minuti in auto</p>
+        <p><strong>🚗 Parcheggio:</strong> [Informazioni su parcheggi disponibili]</p>
+        <p><strong>🚌 Servizio navetta:</strong> [Eventuale servizio di trasporto per gli ospiti]</p>
+        <p><strong>📱 Sul telefono:</strong> Clicca su un'opzione di navigazione per aprire l'app preferita automaticamente!</p>
+      </div>
+
+      <a href="index.html" class="back-btn">← Torna alla Home</a>
+    </div>
+  </main>
+
+  <footer>© <span id="year"></span> Elpidio &amp; Cecilia</footer>
+
+  <script>
+    // Anno corrente
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Indirizzi REALI
+    const locations = {
+      chiesa: {
+        address: "Via S. Sisto, 9, 29121 Piacenza PC",
+        name: "Chiesa di San Sisto",
+        google: "https://www.google.com/maps/dir/?api=1&destination=Via%20S.%20Sisto,%209,%2029121%20Piacenza%20PC",
+        waze: "https://www.waze.com/ul?ll=45.058107,9.697961&navigate=yes",
+        apple: "https://maps.apple.com/?daddr=Via+S.+Sisto,+9,+29121+Piacenza+PC"
+      },
+      villa: {
+        address: "Via Guglielmo Marconi 2, Bordolano (CR)",
+        name: "Location Ricevimento",
+        google: "https://www.google.com/maps/dir/?api=1&destination=Via%20Guglielmo%20Marconi%202,%20Bordolano%20CR",
+        waze: "https://www.waze.com/ul?ll=45.291293,9.985216&navigate=yes",
+        apple: "https://maps.apple.com/?daddr=Via+Guglielmo+Marconi+2,+Bordolano+CR"
+      }
+    };
+
+    // Rileva se è mobile e sistema operativo
+    function isMobile() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
+    function isIOS() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    // Setup pulsanti navigazione
+    function setupNavigationButtons() {
+      // Chiesa
+      document.getElementById('chiesa-google').href = locations.chiesa.google;
+      document.getElementById('chiesa-waze').href = locations.chiesa.waze;
+      document.getElementById('chiesa-apple').href = locations.chiesa.apple;
+      
+      // Villa
+      document.getElementById('villa-google').href = locations.villa.google;
+      document.getElementById('villa-waze').href = locations.villa.waze;
+      document.getElementById('villa-apple').href = locations.villa.apple;
+      
+      // Copia indirizzo
+      document.getElementById('chiesa-copy').addEventListener('click', function(e) {
+        e.preventDefault();
+        navigator.clipboard.writeText(locations.chiesa.address).then(() => {
+          alert('Indirizzo della chiesa copiato! 📋\n\n' + locations.chiesa.address);
+        });
+      });
+      
+      document.getElementById('villa-copy').addEventListener('click', function(e) {
+        e.preventDefault();
+        navigator.clipboard.writeText(locations.villa.address).then(() => {
+          alert('Indirizzo della location copiato! 📋\n\n' + locations.villa.address);
+        });
+      });
+      
+      // Se è mobile, nascondi i pulsanti singoli e mostra i selettori
+      if (isMobile()) {
+        const chiesaButtons = document.querySelectorAll('#chiesa-google, #chiesa-waze, #chiesa-apple');
+        const villaButtons = document.querySelectorAll('#villa-google, #villa-waze, #villa-apple');
+        
+        chiesaButtons.forEach(btn => btn.style.display = 'none');
+        villaButtons.forEach(btn => btn.style.display = 'none');
+        
+        // Mostra i selettori
+        document.getElementById('chiesa-apps-tabs').classList.add('show');
+        document.getElementById('villa-apps-tabs').classList.add('show');
+        
+        // Configura i pulsanti nei selettori
+        setupAppSelectors();
+      }
+    }
+    
+    function setupAppSelectors() {
+      // Funzione per aprire l'app selezionata
+      function openNavigationApp(address, app) {
+        let url;
+        switch(app) {
+          case 'google':
+            url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+            break;
+          case 'waze':
+            // Waze usa coordinate o indirizzo
+            if (address.includes("Via S. Sisto")) {
+              url = locations.chiesa.waze;
+            } else {
+              url = locations.villa.waze;
+            }
+            break;
+          case 'apple':
+            url = `https://maps.apple.com/?daddr=${encodeURIComponent(address)}`;
+            break;
+          default:
+            url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+        }
+        window.open(url, '_blank');
+      }
+      
+      // Aggiungi event listener a tutti i pulsanti nei selettori
+      document.querySelectorAll('.app-buttons .nav-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const address = this.getAttribute('data-address');
+          const app = this.getAttribute('data-app');
+          openNavigationApp(address, app);
+        });
+      });
+    }
+
+    // Quando la pagina carica
+    window.addEventListener('DOMContentLoaded', function() {
+      setupNavigationButtons();
+      
+      // Suggerimento per iOS
+      if (isIOS()) {
+        const note = document.querySelector('.info-note p:last-child');
+        note.innerHTML = '<strong>📱 Sul telefono (iOS):</strong> Clicca su "Apple Maps" per aprire l\'app di navigazione nativa!';
+      }
+    });
+  </script>
+</body>
+</html>

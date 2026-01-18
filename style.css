@@ -1,5 +1,3 @@
-[file name]: style.css
-[file content begin]
 :root {
   --pearl-white: #FAF9F6;
   --nav-text: #222222;
@@ -141,4 +139,3 @@ footer {
 
 /* Cursori: se in futuro vuoi un cursore custom (SVG/PNG), aggiungilo qui */
 a, button { cursor: pointer; }
-[file content end]
