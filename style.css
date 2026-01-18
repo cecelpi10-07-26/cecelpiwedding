@@ -1,3 +1,5 @@
+[file name]: style.css
+[file content begin]
 :root {
   --pearl-white: #FAF9F6;
   --nav-text: #222222;
@@ -17,6 +19,9 @@ body {
   font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
   background: var(--pearl-white);
   background-attachment: fixed;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Navbar (comune) */
@@ -88,6 +93,40 @@ body {
   }
 }
 
+/* Ottimizzazioni per mobile */
+@media (max-width: 768px) {
+  .navlinks {
+    font-size: 14px;
+    gap: 8px;
+  }
+  
+  .navlinks a {
+    padding: 6px 8px;
+  }
+  
+  /* Evita zoom su input iOS */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+  
+  /* Migliora tap target */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Evita effetti hover su touch device */
+@media (hover: none) and (pointer: coarse) {
+  .navlinks a:hover {
+    background: transparent;
+  }
+  
+  .back-btn:hover, .submit-btn:hover {
+    transform: none !important;
+  }
+}
+
 /* Utility */
 .muted { color: #666; }
 
@@ -102,3 +141,4 @@ footer {
 
 /* Cursori: se in futuro vuoi un cursore custom (SVG/PNG), aggiungilo qui */
 a, button { cursor: pointer; }
+[file content end]
