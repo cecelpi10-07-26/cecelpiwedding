@@ -26,8 +26,43 @@
       place-items: center; 
       padding: 0 20px;
       overflow: hidden;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('immagine1.jpg') center/cover no-repeat;
       position: relative;
+    }
+    
+    /* Sfondo con supporto per diverse estensioni immagine */
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+      z-index: 1;
+    }
+    
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        /* Prova in ordine diverse estensioni e nomi */
+        url('immagine1.jpg'),
+        url('immagine1.JPG'),
+        url('immagine1.jpeg'),
+        url('immagine1.JPEG'),
+        url('immagine1.png'),
+        url('immagine1.PNG'),
+        url('immagine1.webp'),
+        url('immagine1.WEBP'),
+        url('immagine1.heic'),
+        url('immagine1.HEIC');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: -1;
     }
     
     .hero::before {
@@ -162,10 +197,6 @@
         margin-top: 30px;
       }
       
-      .hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('immagine1.jpg') center/cover no-repeat;
-      }
-      
       .hero-content {
         padding: 20px 15px;
         margin: 0 10px;
@@ -290,6 +321,7 @@
 
   <!-- HERO - NO SCROLL -->
   <header class="hero">
+    <div class="hero-bg"></div>
     <div class="hero-content">
       <h1 class="couple-name">Elpidio&nbsp;&amp;&nbsp;Cecilia</h1>
       <p class="wedding-date">10/07/2026</p>
@@ -322,6 +354,51 @@
     toggleBackBtn();
     window.addEventListener('scroll', toggleBackBtn);
     if (backBtn) backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Gestione immagine di sfondo con fallback per diverse estensioni
+    document.addEventListener('DOMContentLoaded', function() {
+      const imageFormats = [
+        'jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 
+        'webp', 'WEBP', 'heic', 'HEIC', 'gif', 'GIF',
+        'bmp', 'BMP', 'tiff', 'TIFF'
+      ];
+      
+      const baseName = 'immagine1';
+      const heroBg = document.querySelector('.hero-bg');
+      
+      // Funzione per testare quale immagine esiste
+      function testImage(src) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(src);
+          img.onerror = () => resolve(null);
+          img.src = src;
+        });
+      }
+      
+      // Testa tutte le estensioni in ordine
+      async function findImage() {
+        for (const format of imageFormats) {
+          const src = `${baseName}.${format}`;
+          const result = await testImage(src);
+          if (result) {
+            // Imposta l'immagine trovata come sfondo
+            heroBg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${result}')`;
+            heroBg.style.backgroundPosition = 'center';
+            heroBg.style.backgroundSize = 'cover';
+            heroBg.style.backgroundRepeat = 'no-repeat';
+            console.log(`Immagine di sfondo trovata: ${result}`);
+            return;
+          }
+        }
+        // Se nessuna immagine viene trovata, usa un colore di fallback
+        console.warn('Nessuna immagine di sfondo trovata. Usando colore di fallback.');
+        heroBg.style.background = 'linear-gradient(135deg, #8B4513 0%, #D2691E 100%)';
+      }
+      
+      // Esegui la ricerca dell'immagine
+      findImage();
+    });
   </script>
 </body>
 </html>
