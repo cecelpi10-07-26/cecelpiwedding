@@ -45,16 +45,17 @@ body {
   border-radius: 18px;
   display: grid;
   place-items: center;
-  font-family: 'Dancing Script', cursive;
-  font-size: 28px;
-  font-weight: 700;
+  font-family: 'Great Vibes', cursive;
+  font-size: 32px;
+  font-weight: 400;
   background: linear-gradient(135deg, #D4AF37 0%, #F4E4A6 100%);
   color: #222222;
   border: 2px solid #D4AF37;
-  box-shadow: 0 8px 18px rgba(212, 175, 55, 0.20);
+  box-shadow: 0 8px 18px rgba(212, 175, 55, 0.25);
   user-select: none;
   flex: 0 0 auto;
-  font-style: italic;
+  font-style: normal;
+  letter-spacing: 1px;
 }
 
 .navlinks {
