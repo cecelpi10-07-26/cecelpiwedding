@@ -29,40 +29,15 @@
       position: relative;
     }
     
-    /* Sfondo con supporto per diverse estensioni immagine */
+    /* Contenitore per l'immagine di sfondo */
     .hero-bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+      background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%); /* Fallback color */
       z-index: 1;
-    }
-    
-    .hero-bg::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        /* Prova in ordine diverse estensioni e nomi */
-        url('immagine1.jpg'),
-        url('immagine1.JPG'),
-        url('immagine1.jpeg'),
-        url('immagine1.JPEG'),
-        url('immagine1.png'),
-        url('immagine1.PNG'),
-        url('immagine1.webp'),
-        url('immagine1.WEBP'),
-        url('immagine1.heic'),
-        url('immagine1.HEIC');
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      z-index: -1;
     }
     
     .hero::before {
@@ -366,7 +341,7 @@
       const baseName = 'immagine1';
       const heroBg = document.querySelector('.hero-bg');
       
-      // Funzione per testare quale immagine esiste
+      // Funzione per testare se un'immagine esiste
       function testImage(src) {
         return new Promise((resolve) => {
           const img = new Image();
@@ -380,20 +355,23 @@
       async function findImage() {
         for (const format of imageFormats) {
           const src = `${baseName}.${format}`;
-          const result = await testImage(src);
-          if (result) {
-            // Imposta l'immagine trovata come sfondo
-            heroBg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${result}')`;
-            heroBg.style.backgroundPosition = 'center';
-            heroBg.style.backgroundSize = 'cover';
-            heroBg.style.backgroundRepeat = 'no-repeat';
-            console.log(`Immagine di sfondo trovata: ${result}`);
-            return;
+          try {
+            const result = await testImage(src);
+            if (result) {
+              // TROVATA! Usa questa immagine con opacità
+              heroBg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${result}')`;
+              heroBg.style.backgroundPosition = 'center';
+              heroBg.style.backgroundSize = 'cover';
+              heroBg.style.backgroundRepeat = 'no-repeat';
+              console.log(`✅ Immagine di sfondo trovata: ${result}`);
+              return;
+            }
+          } catch (e) {
+            console.log(`❌ Immagine non trovata: ${src}`);
           }
         }
-        // Se nessuna immagine viene trovata, usa un colore di fallback
-        console.warn('Nessuna immagine di sfondo trovata. Usando colore di fallback.');
-        heroBg.style.background = 'linear-gradient(135deg, #8B4513 0%, #D2691E 100%)';
+        // Se nessuna immagine viene trovata, mantieni il colore di fallback
+        console.warn('⚠️ Nessuna immagine di sfondo trovata. Usando colore di fallback.');
       }
       
       // Esegui la ricerca dell'immagine
