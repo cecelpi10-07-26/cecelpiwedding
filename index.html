@@ -178,8 +178,8 @@
       }
     }
 
-    /* STILI PER FUOCHI D'ARTIFICIO */
-    #fireworks-container {
+    /* STILI PER FUOCHI D'ARTIFICIO POMPOSI */
+    #fireworks-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -188,40 +188,55 @@
       pointer-events: none;
       z-index: 9999;
       overflow: hidden;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%);
     }
 
-    .firework {
+    .firework-particle {
       position: absolute;
-      width: 6px;
-      height: 6px;
       border-radius: 50%;
       opacity: 0;
+      filter: blur(1px);
     }
 
     /* Animazioni per i fuochi */
-    @keyframes firework-explosion {
+    @keyframes fireworkLaunch {
       0% {
-        transform: translate(var(--start-x), var(--start-y)) scale(0);
+        transform: translateY(100vh) scale(0);
         opacity: 1;
       }
-      50% {
+      20% {
         opacity: 1;
       }
       100% {
-        transform: translate(var(--end-x), var(--end-y)) scale(1);
+        transform: translateY(calc(var(--launch-y) - 50px)) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fireworkExplosion {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--explode-x), var(--explode-y)) scale(0);
         opacity: 0;
       }
     }
 
-    @keyframes firework-launch {
-      0% {
-        transform: translate(0, 100vh) scale(0.5);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(var(--launch-x), var(--launch-y)) scale(1);
-        opacity: 1;
-      }
+    @keyframes fireworkFlash {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .firework-flash {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, white 0%, transparent 70%);
+      opacity: 0;
     }
 
     /* BACK-TO-TOP */
@@ -255,8 +270,8 @@
 </head>
 <body id="top">
 
-  <!-- FUOCHI D'ARTIFICIO CONTAINER -->
-  <div id="fireworks-container"></div>
+  <!-- FUOCHI D'ARTIFICIO OVERLAY -->
+  <div id="fireworks-overlay"></div>
 
   <!-- NAVBAR (stile da style.css) -->
   <nav class="nav">
@@ -354,81 +369,297 @@
       // Esegui la ricerca dell'immagine
       findImage();
       
-      // Avvia l'effetto fuochi d'artificio
-      startFireworks();
+      // Avvia l'effetto fuochi d'artificio pomposo
+      startPompousFireworks();
     });
 
-    // FUNZIONE FUOCHI D'ARTIFICIO
-    function startFireworks() {
-      const container = document.getElementById('fireworks-container');
-      const colors = ['#FFD700', '#FF4500', '#00FFFF', '#FF1493', '#32CD32', '#FF69B4', '#1E90FF'];
+    // FUNZIONE FUOCHI D'ARTIFICIO POMPOSI
+    function startPompousFireworks() {
+      const overlay = document.getElementById('fireworks-overlay');
+      const colors = [
+        '#FFD700', '#FF4500', '#00FFFF', '#FF1493', '#32CD32', 
+        '#FF69B4', '#1E90FF', '#FF00FF', '#00FF00', '#FFFF00',
+        '#FF8C00', '#FF1493', '#00CED1', '#8A2BE2', '#DC143C'
+      ];
       
-      // Crea 8 fuochi d'artificio
-      for (let i = 0; i < 8; i++) {
-        setTimeout(() => {
-          createFirework();
-        }, i * 400); // Stagger gli esplosioni
-      }
+      // Suoni di fuochi d'artificio (usando l'API Audio)
+      const playFireworkSound = (volume = 0.3) => {
+        try {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.setValueAtTime(1000, audioContext.currentTime);
+          oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.5);
+          
+          gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+          
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.5);
+        } catch (e) {
+          // Ignora errori audio
+        }
+      };
       
-      // Rimuovi il container dopo 3 secondi
-      setTimeout(() => {
-        container.remove();
-      }, 3000);
+      // Crea 15 fuochi d'artificio principali
+      let fireworksCount = 0;
+      const maxFireworks = 15;
       
-      function createFirework() {
-        // Posizione casuale per l'esplosione
+      const createPompousFirework = () => {
+        if (fireworksCount >= maxFireworks) return;
+        fireworksCount++;
+        
+        // Posizione casuale su tutta la pagina
         const centerX = Math.random() * window.innerWidth;
-        const centerY = Math.random() * window.innerHeight * 0.7; // Non troppo in basso
+        const centerY = Math.random() * (window.innerHeight * 0.8);
         
-        // Colore casuale per questo fuoco
-        const color = colors[Math.floor(Math.random() * colors.length)];
+        // Flash iniziale
+        const flash = document.createElement('div');
+        flash.className = 'firework-flash';
+        flash.style.left = `${centerX}px`;
+        flash.style.top = `${centerY}px`;
+        flash.style.width = '0px';
+        flash.style.height = '0px';
+        flash.style.animation = 'fireworkFlash 200ms ease-out';
+        overlay.appendChild(flash);
         
-        // Crea particelle (20-30 per ogni fuoco)
-        const particleCount = 20 + Math.floor(Math.random() * 10);
+        // Anima il flash
+        setTimeout(() => {
+          flash.style.width = '150px';
+          flash.style.height = '150px';
+          flash.style.marginLeft = '-75px';
+          flash.style.marginTop = '-75px';
+        }, 10);
         
-        for (let i = 0; i < particleCount; i++) {
-          const particle = document.createElement('div');
-          particle.className = 'firework';
-          particle.style.background = color;
-          particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+        // Suono
+        playFireworkSound(0.2);
+        
+        // Rimuovi il flash dopo l'animazione
+        setTimeout(() => {
+          flash.remove();
+        }, 200);
+        
+        // Colore principale per questo fuoco d'artificio
+        const mainColor = colors[Math.floor(Math.random() * colors.length)];
+        const secondaryColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Crea un gran numero di particelle (50-80 per ogni fuoco)
+        const particleCount = 50 + Math.floor(Math.random() * 30);
+        const particleTypes = Math.floor(Math.random() * 3) + 2; // 2-4 tipi diversi di particelle
+        
+        for (let type = 0; type < particleTypes; type++) {
+          const typeColor = type === 0 ? mainColor : 
+                           type === 1 ? secondaryColor : 
+                           colors[Math.floor(Math.random() * colors.length)];
           
-          // Angolo casuale e distanza
+          for (let i = 0; i < particleCount / particleTypes; i++) {
+            setTimeout(() => {
+              const particle = document.createElement('div');
+              particle.className = 'firework-particle';
+              particle.style.background = typeColor;
+              particle.style.boxShadow = `0 0 15px ${typeColor}, 0 0 30px ${typeColor}`;
+              
+              // Dimensioni variabili
+              const size = 4 + Math.random() * 8;
+              particle.style.width = `${size}px`;
+              particle.style.height = `${size}px`;
+              
+              // Posizione iniziale al centro dell'esplosione
+              particle.style.left = `${centerX}px`;
+              particle.style.top = `${centerY}px`;
+              
+              // Angolo casuale per dispersione
+              const angle = Math.random() * Math.PI * 2;
+              const distance = 80 + Math.random() * 250;
+              
+              // Calcola posizione finale
+              const endX = Math.cos(angle) * distance;
+              const endY = Math.sin(angle) * distance;
+              
+              // Imposta variabili CSS per l'animazione
+              particle.style.setProperty('--explode-x', `${endX}px`);
+              particle.style.setProperty('--explode-y', `${endY}px`);
+              
+              // Animazione
+              const duration = 800 + Math.random() * 900;
+              const delay = Math.random() * 100;
+              
+              particle.style.animation = `
+                fireworkExplosion ${duration}ms cubic-bezier(0.1, 0.8, 0.3, 1) ${delay}ms forwards
+              `;
+              
+              overlay.appendChild(particle);
+              
+              // Rimuovi la particella dopo l'animazione
+              setTimeout(() => {
+                if (particle.parentNode) {
+                  particle.remove();
+                }
+              }, duration + delay);
+              
+            }, type * 50); // Delay tra i tipi di particelle
+          }
+        }
+        
+        // Crea particelle aggiuntive (stelle cadenti)
+        setTimeout(() => {
+          createFallingStars(centerX, centerY, mainColor);
+        }, 300);
+      };
+      
+      // Funzione per creare stelle cadenti
+      function createFallingStars(x, y, color) {
+        const starCount = 5 + Math.floor(Math.random() * 10);
+        
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement('div');
+          star.className = 'firework-particle';
+          star.style.background = color;
+          star.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+          
+          const size = 3 + Math.random() * 5;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          
+          star.style.left = `${x}px`;
+          star.style.top = `${y}px`;
+          
+          // Direzione casuale per le stelle cadenti
           const angle = Math.random() * Math.PI * 2;
-          const distance = 50 + Math.random() * 150;
-          
-          // Calcola posizioni finali
+          const distance = 100 + Math.random() * 300;
           const endX = Math.cos(angle) * distance;
           const endY = Math.sin(angle) * distance;
           
-          // Imposta variabili CSS per l'animazione
-          particle.style.setProperty('--start-x', '0px');
-          particle.style.setProperty('--start-y', '0px');
-          particle.style.setProperty('--end-x', `${endX}px`);
-          particle.style.setProperty('--end-y', `${endY}px`);
+          star.style.setProperty('--explode-x', `${endX}px`);
+          star.style.setProperty('--explode-y', `${endY}px`);
           
-          // Posizione iniziale al centro dell'esplosione
-          particle.style.left = `${centerX}px`;
-          particle.style.top = `${centerY}px`;
+          const duration = 1200 + Math.random() * 800;
+          const delay = Math.random() * 200;
           
-          // Dimensione casuale
-          const size = 3 + Math.random() * 5;
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
+          star.style.animation = `
+            fireworkExplosion ${duration}ms ease-out ${delay}ms forwards
+          `;
           
-          // Animazione
-          const duration = 800 + Math.random() * 700;
-          particle.style.animation = `firework-explosion ${duration}ms ease-out forwards`;
+          overlay.appendChild(star);
           
-          container.appendChild(particle);
-          
-          // Rimuovi la particella dopo l'animazione
           setTimeout(() => {
-            if (particle.parentNode) {
-              particle.remove();
+            if (star.parentNode) {
+              star.remove();
             }
-          }, duration);
+          }, duration + delay);
         }
       }
+      
+      // Avvia i fuochi d'artificio in sequenza
+      let fireworkInterval = setInterval(() => {
+        if (fireworksCount < maxFireworks) {
+          createPompousFirework();
+          
+          // A volte crea due fuochi contemporaneamente per un effetto più intenso
+          if (Math.random() > 0.7) {
+            setTimeout(() => createPompousFirework(), 200);
+          }
+        }
+      }, 200);
+      
+      // Crea un grande fuoco d'artificio finale
+      setTimeout(() => {
+        // Grande esplosione finale al centro
+        const finalX = window.innerWidth / 2;
+        const finalY = window.innerHeight / 3;
+        
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => {
+            // Flash finale grande
+            const finalFlash = document.createElement('div');
+            finalFlash.className = 'firework-flash';
+            finalFlash.style.left = `${finalX}px`;
+            finalFlash.style.top = `${finalY}px`;
+            finalFlash.style.width = '0px';
+            finalFlash.style.height = '0px';
+            finalFlash.style.background = 'radial-gradient(circle, white 0%, gold 50%, transparent 100%)';
+            finalFlash.style.animation = 'fireworkFlash 500ms ease-out';
+            overlay.appendChild(finalFlash);
+            
+            setTimeout(() => {
+              finalFlash.style.width = '300px';
+              finalFlash.style.height = '300px';
+              finalFlash.style.marginLeft = '-150px';
+              finalFlash.style.marginTop = '-150px';
+            }, 10);
+            
+            // Suono finale più forte
+            playFireworkSound(0.4);
+            
+            // Particelle finali
+            for (let j = 0; j < 100; j++) {
+              setTimeout(() => {
+                const finalParticle = document.createElement('div');
+                finalParticle.className = 'firework-particle';
+                finalParticle.style.background = colors[j % colors.length];
+                finalParticle.style.boxShadow = `0 0 20px ${colors[j % colors.length]}, 0 0 40px ${colors[j % colors.length]}`;
+                
+                const size = 6 + Math.random() * 10;
+                finalParticle.style.width = `${size}px`;
+                finalParticle.style.height = `${size}px`;
+                
+                finalParticle.style.left = `${finalX}px`;
+                finalParticle.style.top = `${finalY}px`;
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 150 + Math.random() * 400;
+                const endX = Math.cos(angle) * distance;
+                const endY = Math.sin(angle) * distance;
+                
+                finalParticle.style.setProperty('--explode-x', `${endX}px`);
+                finalParticle.style.setProperty('--explode-y', `${endY}px`);
+                
+                const duration = 1500 + Math.random() * 1000;
+                
+                finalParticle.style.animation = `
+                  fireworkExplosion ${duration}ms cubic-bezier(0.1, 0.8, 0.3, 1) forwards
+                `;
+                
+                overlay.appendChild(finalParticle);
+                
+                setTimeout(() => {
+                  if (finalParticle.parentNode) {
+                    finalParticle.remove();
+                  }
+                }, duration);
+                
+              }, j * 10);
+            }
+            
+            setTimeout(() => {
+              if (finalFlash.parentNode) {
+                finalFlash.remove();
+              }
+            }, 500);
+            
+          }, i * 300);
+        }
+      }, 2500);
+      
+      // Ferma l'intervallo dopo 3 secondi
+      setTimeout(() => {
+        clearInterval(fireworkInterval);
+      }, 3000);
+      
+      // Rimuovi l'overlay dopo 3.5 secondi (dopo che tutti gli effetti sono finiti)
+      setTimeout(() => {
+        // Dissolvenza dell'overlay
+        overlay.style.transition = 'opacity 1s ease';
+        overlay.style.opacity = '0';
+        
+        setTimeout(() => {
+          overlay.remove();
+        }, 1000);
+      }, 3500);
     }
   </script>
 </body>
