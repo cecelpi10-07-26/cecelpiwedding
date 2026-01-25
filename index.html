@@ -56,9 +56,6 @@
       position: relative;
       z-index: 2;
       padding: 30px;
-      background: rgba(0, 0, 0, 0.15); /* Schiarito per maggiore leggibilità */
-      border-radius: 20px;
-      backdrop-filter: blur(5px);
       max-width: 90%;
     }
     
@@ -66,7 +63,7 @@
       font-family: 'Fleur De Leah', cursive;
       font-size: clamp(72px, 15vw, 180px);
       font-weight: 400;
-      margin: 0;
+      margin: -20px 0 0 0; /* MODIFICATO: spostato più in alto (-20px) */
       color: #D4AF37;
       white-space: nowrap;
       text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
@@ -79,7 +76,7 @@
       font-family: 'Marcellus', serif;
       font-size: clamp(24px, 4vw, 36px);
       color: #FFFFFF;
-      margin: 25px 0 0;
+      margin: 20px 0 0; /* MODIFICATO: ridotto da 25px a 20px */
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
       letter-spacing: 3px;
       font-weight: 500;
@@ -152,6 +149,19 @@
       animation: gentlePulse 4s infinite ease-in-out;
     }
 
+    /* MESSAGGIO DI BENVENUTO - NUOVO! */
+    .welcome-message {
+      color: #FFFFFF;
+      font-family: 'Marcellus', serif;
+      font-size: clamp(18px, 2.5vw, 22px);
+      max-width: 700px;
+      margin: 40px auto 0;
+      line-height: 1.6;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      font-style: italic;
+      padding: 0 20px;
+    }
+
     /* Responsive per mobile */
     @media (max-width: 768px) {
       .rsvp-hero-btn {
@@ -163,18 +173,24 @@
       .hero-content {
         padding: 20px 15px;
         margin: 0 10px;
-        background: rgba(0, 0, 0, 0.25);
       }
       
       .couple-name {
         font-size: clamp(62px, 13vw, 140px);
         white-space: normal;
         line-height: 0.9;
+        margin: -15px 0 0 0; /* MODIFICATO per mobile */
       }
       
       .wedding-date {
         font-size: clamp(20px, 3.5vw, 28px);
-        margin: 15px 0 0;
+        margin: 15px 0 0; /* MODIFICATO per mobile */
+      }
+      
+      .welcome-message {
+        font-size: clamp(16px, 2.2vw, 20px);
+        margin: 30px auto 0;
+        padding: 0 15px;
       }
     }
 
@@ -300,6 +316,11 @@
         <span>Conferma la tua presenza</span>
         <div class="shine"></div>
       </a>
+      
+      <!-- MESSAGGIO DI BENVENUTO - NUOVO! -->
+      <div class="welcome-message">
+        Siamo felicissimi di darvi il benvenuto sul nostro sito. In attesa del grande giorno, abbiamo creato questo sito, dove potete trovare tutte le informazioni utili per il giorno del matrimonio e qualche particolare della nostra storia. A presto, un abbraccio!
+      </div>
     </div>
   </header>
 
