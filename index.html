@@ -388,9 +388,9 @@
             const result = await testImage(src);
             if (result) {
               // TROVATA! Usa questa immagine con opacità
-              // MODIFICA: background-position spostato a 45% (sinistra) e 55% (in basso)
+              // MODIFICATO: calc per spostamento preciso - sinistra e in basso
               heroBg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('${result}')`;
-              heroBg.style.backgroundPosition = '45% 55%'; // MODIFICATO: leggermente a sinistra e in basso
+              heroBg.style.backgroundPosition = 'calc(50% - 30px) calc(50% + 20px)'; // 30px a sinistra, 20px in basso
               heroBg.style.backgroundSize = 'cover';
               heroBg.style.backgroundRepeat = 'no-repeat';
               console.log(`✅ Immagine di sfondo trovata: ${result}`);
