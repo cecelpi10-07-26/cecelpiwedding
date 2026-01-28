@@ -1,5 +1,3 @@
-[file name]: style.css
-[file content begin]
 :root {
   --pearl-white: #FFF8F0;
   --nav-text: #222222;
@@ -55,23 +53,25 @@ body {
   overflow: hidden;
 }
 
+/* LOGO MODIFICATO: Font Imperial Script, colore oro, sfondo avorio */
 .logo-badge {
   width: 56px;
   height: 56px;
   border-radius: 18px;
   display: grid;
   place-items: center;
-  font-family: 'Great Vibes', cursive;
-  font-size: 32px;
+  font-family: 'Imperial Script', cursive;
+  font-size: 28px;
   font-weight: 400;
-  background: linear-gradient(135deg, #D4AF37 0%, #F4E4A6 100%);
-  color: #222222;
-  border: 2px solid #D4AF37;
+  background: #FFF8F0; /* Sfondo avorio */
+  color: #D4AF37; /* Colore oro */
+  border: 2px solid #D4AF37; /* Bordo oro */
   box-shadow: 0 8px 18px rgba(212, 175, 55, 0.25);
   user-select: none;
   flex-shrink: 0;
   font-style: normal;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  padding-top: 4px; /* Per centrare meglio il testo */
 }
 
 /* HAMBURGER MENU - VISIBILE SOLO SU MOBILE */
@@ -80,7 +80,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 30px;
-  height: 21px;
+  height: 24px; /* Aumentata altezza per evitare taglio */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -95,18 +95,21 @@ body {
   background-color: #222;
   border-radius: 3px;
   transition: var(--transition);
+  transform-origin: center;
 }
 
+/* CORRETTO: animazione hamburger → X senza tagli */
 .hamburger.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
+  transform: rotate(45deg) translate(6px, 6px);
 }
 
 .hamburger.active span:nth-child(2) {
   opacity: 0;
+  transform: scale(0);
 }
 
 .hamburger.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* NAVLINKS - DESKTOP */
@@ -262,4 +265,3 @@ a, button {
   background: rgba(255, 255, 255, 1);
   transform: translateY(-2px);
 }
-[file content end]

@@ -1,5 +1,3 @@
-[file name]: .htaccess
-[file content begin]
 # Blocca l'accesso ai file sensibili
 <FilesMatch "(\.(htaccess|htpasswd|ini|log|sh|sql)|~)$">
     Order Allow,Deny
@@ -26,4 +24,3 @@ Header set X-Robots-Tag "noindex, nofollow, noarchive"
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
-[file content end]
