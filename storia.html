@@ -69,8 +69,6 @@
     }
     .photo-container {
       width: 100%;
-      height: 300px;
-      background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
       border-radius: 16px;
       display: grid;
       place-items: center;
@@ -79,12 +77,21 @@
       margin: 20px 0;
       overflow: hidden;
       position: relative;
+      background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+      min-height: 200px;
+      max-height: 500px;
     }
     .story-img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      max-height: 500px;
+      object-fit: contain;
       display: none;
+      border-radius: 12px;
+    }
+    .photo-placeholder-text {
+      padding: 20px;
+      text-align: center;
     }
     .back-btn {
       display: inline-block;
@@ -148,7 +155,7 @@
         <p>La nostra storia ha radici lontane, che affondano nei banchi di scuola. Ci siamo conosciuti alle elementari, nel 1995, due bambini che dividevano la stessa aula. Abbiamo proseguito insieme anche alle scuole medie, condividendo le prime amicizie e le avventure dell'adolescenza. Poi la vita, come spesso accade, ci ha portato su strade diverse per le superiori e l'università. Ma il destino, si sa, sa essere paziente e ha saputo attendere il momento giusto per riunirci.</p>
         <div class="photo-container" id="photo-container-1">
           <img class="story-img" id="story-img-1" alt="I nostri primi anni di scuola">
-          <span>I nostri primi anni di scuola</span>
+          <div class="photo-placeholder-text" id="placeholder-1">I nostri primi anni di scuola</div>
         </div>
       </div>
 
@@ -157,7 +164,7 @@
         <p>Dopo anni, due rimpatriate con i compagni delle elementari – una nel 2018 e l'altra nel 2020 – hanno riacceso una scintilla. Alla fine del 2020, abbiamo iniziato a frequentarci e da lì è nato un amore profondo e consapevole. Il nostro legame è stato messo alla prova e temprato nella complicità: a marzo 2021, quando Cecilia ha rischiato di rompersi una spalla, Elpidio è stato il suo sostegno più fermo. Poi, a fine anno, è toccato a Elpidio affrontare un'operazione, e Cecilia non ha mai lasciato il suo fianco. In quelle difficoltà abbiamo scoperto non solo la forza dell'altro, ma anche la bellezza di prenderci cura l'uno dell'altra. Le nostre estati, da giugno ad agosto, sono diventate lunghi e indimenticabili viaggi in cui costruire ricordi solo nostri.</p>
         <div class="photo-container" id="photo-container-2">
           <img class="story-img" id="story-img-2" alt="Il nostro amore quotidiano">
-          <span>Il nostro amore quotidiano</span>
+          <div class="photo-placeholder-text" id="placeholder-2">Il nostro amore quotidiano</div>
         </div>
       </div>
 
@@ -166,7 +173,7 @@
         <p>E così siamo arrivati a Luglio 2025, sull'isola di Zante. Il cielo si tingeva d'arancio e oro al tramonto, e noi eravamo su una barca, in un momento di pura serenità durante un aperitivo. In quel silenzio carico di emozione, all'improvviso, Elpidio si è inginocchiato. Con il cuore che batteva all'impazzata e lo sguardo pieno di promesse, ha chiesto a Cecilia di passare il resto della vita insieme. La risposta, tra lacrime di gioia e un abbraccio che non finiva mai, non poteva che essere un "Sì" totale, urlato al vento del mare greco.</p>
         <div class="photo-container" id="photo-container-3">
           <img class="story-img" id="story-img-3" alt="Il momento magico della proposta">
-          <span>Il momento magico della proposta</span>
+          <div class="photo-placeholder-text" id="placeholder-3">Il momento magico della proposta</div>
         </div>
       </div>
 
@@ -175,7 +182,7 @@
         <p>Da quel "sì" è iniziato il viaggio più bello: prepararci a diventare marito e moglie. Ogni dettaglio dell'organizzazione è intriso della nostra storia, delle risate, delle sfide superate e della certezza che essere insieme è la nostra casa. Con il cuore colmo di gratitudine, non vediamo l'ora di celebrare questo passo con tutte le persone care che hanno segnato, in modi diversi, il cammino che ci ha portati fin qui.</p>
         <div class="photo-container" id="photo-container-4">
           <img class="story-img" id="story-img-4" alt="Verso il nostro futuro">
-          <span>Verso il nostro futuro</span>
+          <div class="photo-placeholder-text" id="placeholder-4">Verso il nostro futuro</div>
         </div>
       </div>
 
@@ -229,7 +236,7 @@
     if (backBtn) backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     // Funzione per caricare immagini con diversi formati
-    function loadImageWithFallback(baseName, imgElement, container) {
+    function loadImageWithFallback(baseName, imgElement, placeholderElement) {
       const imageFormats = [
         'jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 
         'webp', 'WEBP', 'heic', 'HEIC', 'gif', 'GIF',
@@ -240,8 +247,14 @@
       function testImage(src) {
         return new Promise((resolve) => {
           const img = new Image();
-          img.onload = () => resolve(src);
-          img.onerror = () => resolve(null);
+          img.onload = () => {
+            console.log(`✅ Immagine trovata: ${src}`);
+            resolve(src);
+          };
+          img.onerror = () => {
+            console.log(`❌ Immagine non trovata: ${src}`);
+            resolve(null);
+          };
           img.src = src;
         });
       }
@@ -256,18 +269,29 @@
               // TROVATA! Mostra l'immagine
               imgElement.src = result;
               imgElement.style.display = 'block';
+              
               // Nascondi il testo del placeholder
-              const span = container.querySelector('span');
-              if (span) span.style.display = 'none';
-              console.log(`✅ Immagine trovata: ${result}`);
-              return;
+              if (placeholderElement) {
+                placeholderElement.style.display = 'none';
+              }
+              
+              // Adatta il contenitore all'immagine
+              const container = imgElement.parentElement;
+              if (container) {
+                container.style.background = 'none';
+                container.style.minHeight = 'auto';
+              }
+              
+              return true;
             }
           } catch (e) {
-            console.log(`❌ Immagine non trovata: ${src}`);
+            console.log(`Errore nel caricamento: ${src}`, e);
           }
         }
+        
         // Se nessuna immagine viene trovata, mantieni il placeholder
         console.warn(`⚠️ Nessuna immagine trovata per: ${baseName}`);
+        return false;
       }
       
       // Esegui la ricerca dell'immagine
@@ -287,9 +311,9 @@
       // Per ogni sezione, cerca l'immagine
       for (let i = 0; i < 4; i++) {
         const imgElement = document.getElementById(`story-img-${i+1}`);
-        const container = document.getElementById(`photo-container-${i+1}`);
-        if (imgElement && container) {
-          loadImageWithFallback(imageBaseNames[i], imgElement, container);
+        const placeholderElement = document.getElementById(`placeholder-${i+1}`);
+        if (imgElement) {
+          loadImageWithFallback(imageBaseNames[i], imgElement, placeholderElement);
         }
       }
     });
