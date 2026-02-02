@@ -26,7 +26,7 @@ html, body {
 body {
   color: #222;
   font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Inter, Arial, sans-serif;
-  background: #FFF8F0;
+  background: transparent;
   background-attachment: fixed;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
