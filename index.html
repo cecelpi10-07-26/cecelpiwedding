@@ -262,7 +262,87 @@
       background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
       opacity: 0;
     }
-  </style>
+  
+
+    /* =========================================================
+       FIX HOME: mostra immagine intera (no tagli) + testi come
+       "immagine giusta Elpidio e Cecilia"
+       ========================================================= */
+    .hero-bg{
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      background-size: contain !important;
+      background-color: #000 !important; /* bande sopra/sotto o laterali */
+    }
+
+    /* Posizionamento testi (desktop) */
+    .hero-content{
+      position: absolute !important;
+      inset: 0 !important;
+      padding: 0 !important;
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    .hero-content .couple-name{
+      position: absolute;
+      top: calc(70px + 4vh);
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 !important;
+    }
+
+    .hero-content .wedding-date{
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 !important;
+    }
+
+    .hero-content .rsvp-hero-btn{
+      position: absolute;
+      top: 66%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 !important;
+    }
+
+    .hero-content .welcome-message{
+      position: absolute;
+      bottom: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 !important;
+      width: min(900px, 92%);
+    }
+
+    /* Mobile: torna a layout "in colonna" per evitare sovrapposizioni */
+    @media (max-width: 768px){
+      .hero{
+        height: 100vh;
+      }
+      .hero-content{
+        position: relative !important;
+        inset: auto !important;
+        padding: 24px !important;
+      }
+      .hero-content .couple-name,
+      .hero-content .wedding-date,
+      .hero-content .rsvp-hero-btn,
+      .hero-content .welcome-message{
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        transform: none !important;
+      }
+      .hero-content .welcome-message{
+        width: 100%;
+      }
+    }
+
+</style>
 </head>
 <body id="top">
 
@@ -389,10 +469,11 @@
             if (result) {
               // TROVATA! Usa questa immagine con opacità
               // MODIFICATO: calc per spostamento preciso - sinistra e in basso
-              heroBg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('${result}')`;
-              heroBg.style.backgroundPosition = 'calc(50% - 0px) calc(50% + 0px)'; // 30px a sinistra, 20px in basso
-              heroBg.style.backgroundSize = 'cover';
+              heroBg.style.backgroundImage = `url('${result}')`;
+              heroBg.style.backgroundPosition = 'center center';
+              heroBg.style.backgroundSize = 'contain';
               heroBg.style.backgroundRepeat = 'no-repeat';
+              heroBg.style.backgroundColor = '#000';
               console.log(`✅ Immagine di sfondo trovata: ${result}`);
               return;
             }
