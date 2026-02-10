@@ -47,7 +47,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.08);
+      background: rgba(0, 0, 0, 0.2);
       z-index: 1;
     }
     
@@ -264,37 +264,18 @@
     }
   
 
-    
     /* =========================================================
-       FIX HOME (desktop + mobile)
-       - niente barre nere laterali: sfondo avorio
-       - pulsante RSVP avorio sotto la citazione
-       - footer sovrapposto alla foto (dentro hero)
+       FIX HOME: mostra immagine intera (no tagli) + testi come
+       "immagine giusta Elpidio e Cecilia"
        ========================================================= */
-    :root{
-      --ivory-bg: #FAF0DC;
-      --ivory-btn: #FFF9ED;
-      --ivory-btn-border: #E8D7B6;
-      --ivory-btn-text: #6F5833;
-    }
-
-    body{
-      background: var(--ivory-bg);
-    }
-
-    .hero{
-      min-height: 100vh;
-      background: var(--ivory-bg);
-    }
-
     .hero-bg{
       background-position: center center !important;
       background-repeat: no-repeat !important;
       background-size: contain !important;
-      background-color: var(--ivory-bg) !important; /* laterali avorio */
+      background-color: #000 !important; /* bande sopra/sotto o laterali */
     }
 
-    /* Desktop: posizionamento sovrapposto all'immagine */
+    /* Posizionamento testi (desktop) */
     .hero-content{
       position: absolute !important;
       inset: 0 !important;
@@ -305,7 +286,7 @@
 
     .hero-content .couple-name{
       position: absolute;
-      top: calc(62px + 3.6vh);
+      top: calc(70px + 4vh);
       left: 50%;
       transform: translateX(-50%);
       margin: 0 !important;
@@ -313,7 +294,15 @@
 
     .hero-content .wedding-date{
       position: absolute;
-      top: 53%;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0 !important;
+    }
+
+    .hero-content .rsvp-hero-btn{
+      position: absolute;
+      top: 66%;
       left: 50%;
       transform: translateX(-50%);
       margin: 0 !important;
@@ -321,121 +310,18 @@
 
     .hero-content .welcome-message{
       position: absolute;
-      bottom: 17%;
+      bottom: 6%;
       left: 50%;
       transform: translateX(-50%);
       margin: 0 !important;
-      width: min(980px, 92%);
-      text-align: center;
+      width: min(900px, 92%);
     }
 
-    /* Pulsante: avorio, centrato, sotto citazione */
-    .hero-content .rsvp-hero-btn{
-      position: absolute;
-      bottom: 8.2%;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0 !important;
-      background: var(--ivory-btn) !important;
-      color: var(--ivory-btn-text) !important;
-      border: 2px solid var(--ivory-btn-border) !important;
-      box-shadow:
-        0 8px 24px rgba(0,0,0,0.18),
-        inset 0 1px 0 rgba(255,255,255,0.9) !important;
-      animation: none !important;
-      font-weight: 700;
-    }
-
-    .hero-content .rsvp-hero-btn:hover{
-      transform: translateX(-50%) translateY(-2px);
-      box-shadow:
-        0 12px 28px rgba(0,0,0,0.22),
-        inset 0 1px 0 rgba(255,255,255,1) !important;
-      background: #FFFCF3 !important;
-    }
-
-    .hero-content .rsvp-hero-btn .shine{
-      display: none;
-    }
-
-    /* Footer dentro foto (no fascia separata in basso) */
-    .hero-footer{
-      position: absolute !important;
-      left: 50%;
-      bottom: 1rem;
-      transform: translateX(-50%);
-      margin: 0 !important;
-      padding: 0 !important;
-      background: transparent !important;
-      color: #f2e8d2 !important;
-      font-family: 'Marcellus', serif;
-      font-size: clamp(15px, 1.2vw, 22px);
-      text-shadow: 0 2px 8px rgba(0,0,0,0.55);
-      z-index: 3;
-      border: none !important;
-    }
-
-    /* Mobile: layout in colonna ordinato, senza sovrapposizioni */
+    /* Mobile: torna a layout "in colonna" per evitare sovrapposizioni */
     @media (max-width: 768px){
       .hero{
-        min-height: 100vh;
-        padding-top: 10px;
+        height: 100vh;
       }
-
-      .hero-bg{
-        background-size: contain !important; /* mobile: immagine intera */
-        background-position: center center !important;
-      }
-
-      .hero-content{
-        position: relative !important;
-        inset: auto !important;
-        padding: clamp(14px, 4vw, 24px) !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-bottom: 78px !important; /* spazio per footer dentro hero */
-      }
-
-      .hero-content .couple-name,
-      .hero-content .wedding-date,
-      .hero-content .welcome-message,
-      .hero-content .rsvp-hero-btn{
-        position: relative !important;
-        top: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-        transform: none !important;
-      }
-
-      .hero-content .couple-name{
-        margin-top: clamp(8px, 2vh, 16px) !important;
-      }
-
-      .hero-content .wedding-date{
-        margin-top: 16px !important;
-      }
-
-      .hero-content .welcome-message{
-        margin-top: 28px !important;
-        width: 100%;
-      }
-
-      .hero-content .rsvp-hero-btn{
-        margin-top: 16px !important;
-        padding: 14px 28px;
-        font-size: clamp(16px, 4vw, 18px);
-        width: min(92%, 420px);
-        text-align: center;
-      }
-
-      .hero-footer{
-        font-size: 14px;
-        bottom: 10px;
-      }
-    }
-
       .hero-content{
         position: relative !important;
         inset: auto !important;
@@ -492,20 +378,22 @@
     <div class="hero-content">
       <h1 class="couple-name">Elpidio&nbsp;&amp;&nbsp;Cecilia</h1>
       <p class="wedding-date">10/07/2026</p>
+      
+      <!-- PULSANTE CONFERMA PRESENZA ORO/BIANCO -->
+      <a href="rsvp.html" class="rsvp-hero-btn" id="heroRsvpBtn">
+        <span>Conferma la tua presenza</span>
+        <div class="shine"></div>
+      </a>
+      
       <!-- MESSAGGIO DI BENVENUTO -->
       <div class="welcome-message">
         "Il mio amore è profondo quanto il mare; più ti dono, più ne ho, perchè l'uno e l'altro sono infiniti"
         W. Shakespeare
       </div>
-
-      <!-- PULSANTE CONFERMA PRESENZA (AVORIO) -->
-      <a href="rsvp.html" class="rsvp-hero-btn" id="heroRsvpBtn">
-        <span>Conferma la tua presenza</span>
-        <div class="shine"></div>
-      </a>
     </div>
-    <footer class="hero-footer">© <span id="year"></span> Elpidio &amp; Cecilia</footer>
   </header>
+
+  <footer>© <span id="year"></span> Elpidio &amp; Cecilia</footer>
 
   <!-- BACK TO TOP BUTTON -->
   <button class="back-to-top" id="backToTop" aria-label="Torna all'inizio" title="Torna su">▲</button>
@@ -586,7 +474,7 @@
               heroBg.style.backgroundPosition = 'center center';
               heroBg.style.backgroundSize = 'contain';
               heroBg.style.backgroundRepeat = 'no-repeat';
-              heroBg.style.backgroundColor = '#FAF0DC';
+              heroBg.style.backgroundColor = '#000';
               console.log(`✅ Immagine di sfondo trovata: ${result}`);
               return;
             }
