@@ -21,7 +21,7 @@
     
     /* HERO CON IMMAGINE DI SFONDO */
     .hero { 
-      height: 100vh; 
+      height: 110vh; /* MODIFICATO: aumentato per coprire il footer */
       display: grid; 
       place-items: center; 
       padding: 0 20px;
@@ -35,7 +35,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 110vh; /* MODIFICATO: aumentato per coprire il footer */
       background: #FAF9F6; /* MODIFICATO: avorio invece di gradiente */
       z-index: 1;
     }
@@ -269,16 +269,23 @@
        "immagine giusta Elpidio e Cecilia"
        ========================================================= */
     .hero-bg{
-      background-position: center center !important;
+      background-position: center 30% !important; /* MODIFICATO: spostata più in alto */
       background-repeat: no-repeat !important;
       background-size: cover !important; /* MODIFICATO: cover per estendere l'immagine */
       background-color: #FAF9F6 !important;
+      height: 110vh !important; /* MODIFICATO: aumentata altezza */
     }
 
     /* Per mobile: mantieni contain per vedere tutta l'immagine */
     @media (max-width: 768px){
       .hero-bg{
         background-size: contain !important;
+        background-position: center center !important;
+        height: 100vh !important; /* MODIFICATO: mobile normale */
+      }
+      
+      .hero {
+        height: 100vh !important; /* MODIFICATO: mobile normale */
       }
     }
 
@@ -317,7 +324,7 @@
 
     .hero-content .welcome-message{
       position: absolute;
-      bottom: 6%;
+      bottom: 10%; /* MODIFICATO: spostata più in alto per fare spazio al footer */
       left: 50%;
       transform: translateX(-50%);
       margin: 0 !important;
@@ -397,10 +404,13 @@
         "Il mio amore è profondo quanto il mare; più ti dono, più ne ho, perchè l'uno e l'altro sono infiniti"
         W. Shakespeare
       </div>
+      
+      <!-- FOOTER DENTRO L'HERO -->
+      <footer style="position: absolute; bottom: 0; width: 100%; text-align: center; padding: 20px; z-index: 3; color: rgba(255,255,255,0.8); font-size: 14px;">
+        © <span id="year"></span> Elpidio &amp; Cecilia
+      </footer>
     </div>
   </header>
-
-  <footer>© <span id="year"></span> Elpidio &amp; Cecilia</footer>
 
   <!-- BACK TO TOP BUTTON -->
   <button class="back-to-top" id="backToTop" aria-label="Torna all'inizio" title="Torna su">▲</button>
@@ -477,13 +487,16 @@
             if (result) {
               // TROVATA! Usa questa immagine
               heroBg.style.backgroundImage = `url('${result}')`;
-              heroBg.style.backgroundPosition = 'center center';
               
               // Adatta background-size per dispositivo
               if (window.innerWidth <= 768) {
                 heroBg.style.backgroundSize = 'contain';
+                heroBg.style.backgroundPosition = 'center center';
+                heroBg.style.height = '100vh';
               } else {
-                heroBg.style.backgroundSize = 'cover'; // MODIFICATO: cover per desktop
+                heroBg.style.backgroundSize = 'cover';
+                heroBg.style.backgroundPosition = 'center 30%'; // Sposta l'immagine più in alto
+                heroBg.style.height = '110vh'; // Estende l'immagine
               }
               
               heroBg.style.backgroundRepeat = 'no-repeat';
@@ -494,8 +507,12 @@
               window.addEventListener('resize', function() {
                 if (window.innerWidth <= 768) {
                   heroBg.style.backgroundSize = 'contain';
+                  heroBg.style.backgroundPosition = 'center center';
+                  heroBg.style.height = '100vh';
                 } else {
                   heroBg.style.backgroundSize = 'cover';
+                  heroBg.style.backgroundPosition = 'center 30%';
+                  heroBg.style.height = '110vh';
                 }
               });
               
