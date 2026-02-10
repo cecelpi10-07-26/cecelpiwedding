@@ -60,13 +60,13 @@
       width: 100%;
     }
     
-    /* MODIFICATO: Font Imperial Script e margine superiore aumentato */
+    /* MODIFICATO: Font Imperial Script e colore bianco */
     .couple-name {
       font-family: 'Imperial Script', cursive;
       font-size: clamp(64px, 12vw, 160px);
       font-weight: 400;
       margin: 30px 0 0 0;
-      color: #FF7F50;
+      color: white; /* CAMBIATO: bianco invece di #FF7F50 */
       white-space: nowrap;
       text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
       letter-spacing: 1px;
@@ -77,83 +77,16 @@
     .wedding-date {
       font-family: 'Marcellus', serif;
       font-size: clamp(24px, 4vw, 36px);
-      color: #FF7F50;
+      color: white; /* CAMBIATO: bianco invece di #FF7F50 */
       margin: 20px 0 0;
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
       letter-spacing: 3px;
       font-weight: 500;
     }
     
-    /* PULSANTE HERO ORO/BIANCO */
-    .rsvp-hero-btn {
-      display: inline-block;
-      margin-top: 40px;
-      padding: 18px 40px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #D4AF37 0%, #F4E4A6 50%, #D4AF37 100%);
-      color: #222;
-      font-family: 'Marcellus', serif;
-      font-size: 20px;
-      font-weight: 700;
-      text-decoration: none;
-      border: 2px solid #B8941F;
-      box-shadow: 
-        0 8px 30px rgba(212, 175, 55, 0.5),
-        inset 0 2px 4px rgba(255, 255, 255, 0.8),
-        0 0 25px rgba(212, 175, 55, 0.5);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      letter-spacing: 1px;
-    }
-
-    .rsvp-hero-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 
-        0 12px 40px rgba(212, 175, 55, 0.7),
-        inset 0 2px 6px rgba(255, 255, 255, 0.9),
-        0 0 35px rgba(212, 175, 55, 0.7);
-      background: linear-gradient(135deg, #E6BF40 0%, #F5E8B0 50%, #E6BF40 100%);
-    }
-
-    .rsvp-hero-btn:active {
-      transform: translateY(-1px);
-    }
-
-    /* Effetto brillante */
-    .rsvp-hero-btn .shine {
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(255, 255, 255, 0.5) 50%,
-        transparent 100%
-      );
-      transform: rotate(30deg);
-      transition: all 0.5s ease;
-    }
-
-    .rsvp-hero-btn:hover .shine {
-      left: 100%;
-    }
-
-    /* Animazione pulsazione leggera */
-    @keyframes gentlePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-    }
-
-    .rsvp-hero-btn {
-      animation: gentlePulse 4s infinite ease-in-out;
-    }
-
     /* MESSAGGIO DI BENVENUTO */
     .welcome-message {
-      color: #FF7F50;
+      color: white; /* CAMBIATO: bianco invece di #FF7F50 */
       font-family: 'Marcellus', serif;
       font-size: clamp(18px, 2.5vw, 22px);
       max-width: 700px;
@@ -166,12 +99,6 @@
 
     /* Responsive per mobile migliorato */
     @media (max-width: 768px) {
-      .rsvp-hero-btn {
-        padding: 16px 32px;
-        font-size: 18px;
-        margin-top: 30px;
-      }
-      
       .hero-content {
         padding: 20px 15px;
         margin: 0 10px;
@@ -301,75 +228,96 @@
       padding: 0 !important;
       max-width: none !important;
       width: 100% !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .hero-content .couple-name{
-      position: absolute;
-      top: calc(70px + 4vh);
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0 !important;
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin: 0 0 20px 0 !important;
     }
 
     .hero-content .wedding-date{
-      position: absolute;
-      top: 55%;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0 !important;
-    }
-
-    .hero-content .rsvp-hero-btn{
-      position: absolute;
-      top: 66%;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0 !important;
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin: 0 0 40px 0 !important;
     }
 
     .hero-content .welcome-message{
-      position: absolute;
-      bottom: 10%; /* MODIFICATO: spostata più in alto per fare spazio al footer */
-      left: 50%;
-      transform: translateX(-50%);
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: none;
       margin: 0 !important;
       width: min(900px, 92%);
     }
 
-    /* Mobile: torna a layout "in colonna" per evitare sovrapposizioni */
+    /* Mobile: layout flessibile per gestire spazio senza pulsante */
     @media (max-width: 768px){
       .hero{
         height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
+      
       .hero-content{
         position: relative !important;
         inset: auto !important;
         padding: 24px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh;
+        width: 100% !important;
       }
+      
       .hero-content .couple-name,
       .hero-content .wedding-date,
-      .hero-content .rsvp-hero-btn,
       .hero-content .welcome-message{
         position: relative !important;
         top: auto !important;
         bottom: auto !important;
         left: auto !important;
         transform: none !important;
-      }
-      .hero-content .welcome-message{
-        width: 100%;
+        margin: 0 !important;
       }
       
-      /* Footer su mobile */
+      .hero-content .couple-name {
+        margin-top: 40px !important;
+        margin-bottom: 20px !important;
+      }
+      
+      .hero-content .wedding-date {
+        margin-bottom: 30px !important;
+      }
+      
+      .hero-content .welcome-message{
+        width: 100%;
+        margin-top: auto !important; /* Spinge il messaggio verso l'alto */
+        margin-bottom: 20px !important;
+      }
+      
+      /* Footer su mobile - CORRETTO: posizionato in fondo */
       .hero footer {
-        position: absolute !important;
-        bottom: 10px !important;
+        position: relative !important;
+        bottom: auto !important;
         width: 100% !important;
         text-align: center !important;
         padding: 15px !important;
         z-index: 3 !important;
-        color: rgba(255,255,255,0.8) !important;
+        color: rgba(255,255,255,0.9) !important;
         font-size: 12px !important;
+        margin-top: auto !important; /* Spinge il footer in fondo */
+        background: rgba(0, 0, 0, 0.3); /* Sfondo scuro per leggibilità */
+        border-radius: 10px 10px 0 0;
+        backdrop-filter: blur(5px);
       }
     }
 
@@ -409,12 +357,6 @@
     <div class="hero-content">
       <h1 class="couple-name">Elpidio&nbsp;&amp;&nbsp;Cecilia</h1>
       <p class="wedding-date">10/07/2026</p>
-      
-      <!-- PULSANTE CONFERMA PRESENZA ORO/BIANCO -->
-      <a href="rsvp.html" class="rsvp-hero-btn" id="heroRsvpBtn">
-        <span>Conferma la tua presenza</span>
-        <div class="shine"></div>
-      </a>
       
       <!-- MESSAGGIO DI BENVENUTO -->
       <div class="welcome-message">
