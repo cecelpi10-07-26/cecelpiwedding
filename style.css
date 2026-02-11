@@ -53,9 +53,8 @@ body {
 -webkit-backdrop-filter: blur(10px); /* per Safari */
   border-bottom: 1px solid rgba(0,0,0,0.05);
   box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-  height: 70px;
-  overflow: hidden;
-}
+  height: 80px;
+  }
 
 /* LOGO MODIFICATO: Immagine personalizzata SENZA RIQUADRO */
 .logo-badge {
@@ -79,15 +78,16 @@ body {
 
 /* HAMBURGER MENU - VISIBILE SOLO SU MOBILE */
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 30px;
-  height: 24px; /* Aumentata altezza per evitare taglio */
-  background: transparent;
-  border: none;
+  width: 36px;
+  height: 30px;
+  background: white;
+  border: 2px solid #D4AF37;
+  border-radius: 8px;
+  padding: 6px;
   cursor: pointer;
-  padding: 0;
   z-index: 1001;
 }
 
@@ -168,7 +168,7 @@ body {
   }
   .navlinks {
     position: fixed;
-    top: 70px;
+    top: 80px;
     left: 0;
     right: 0;
     background: #FFF8F0;
@@ -181,8 +181,8 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
-    z-index: 999;
-    max-height: calc(100vh - 70px);
+    z-index: 1002;
+    max-height: calc(100vh - 80px);
     overflow-y: auto;
   }
   
