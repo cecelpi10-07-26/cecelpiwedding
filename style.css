@@ -124,7 +124,7 @@ body {
   color: var(--nav-text);
   text-decoration: none;
   font-weight: 700;
-  font-family: 'EB Garamond', serif;
+  font-family: 'EB Garamond', serif !important;
   padding: 8px 12px;
   border-radius: 10px;
   transition: var(--transition);
@@ -203,7 +203,7 @@ body {
     text-align: center;
     padding: 12px 16px;
     font-size: 18px;
-    font-family: 'EB Garamond', serif;
+    font-family: 'EB Garamond', serif !important;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(0,0,0,0.05);
