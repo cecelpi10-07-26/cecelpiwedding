@@ -12,6 +12,7 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:wght@600;700&family=Marcellus&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <style>
@@ -197,6 +198,44 @@
 
     /* form invisibile/iframe */
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  /* 🌟 TUTTA LA PAGINA in EB Garamond, tranne il titolo principale */
+body, body * {
+  font-family: 'EB Garamond', serif;
+}
+    /* 📏 PARAGRAFI E TESTI PIÙ GRANDI */
+.rsvp-subtitle,
+.form-group label,
+.form-group input,
+.form-group select,
+.form-group textarea,
+.help,
+.submit-btn,
+.back-btn,
+.success-message p,
+.error-message,
+footer p,
+p {
+  font-size: 22px;
+  line-height: 1.6;
+}
+
+/* 📱 Su mobile */
+@media (max-width: 768px) {
+  .rsvp-subtitle,
+  .form-group label,
+  .form-group input,
+  .form-group select,
+  .form-group textarea,
+  .help,
+  .submit-btn,
+  .back-btn,
+  .success-message p,
+  .error-message,
+  footer p,
+  p {
+    font-size: 20px;
+  }
+}
   </style>
 </head>
 <body>
