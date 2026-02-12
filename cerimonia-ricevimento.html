@@ -286,6 +286,42 @@
 body, body *:not(h1) {
   font-family: 'EB Garamond', serif;
 }
+    /* 📏 PARAGRAFI PIÙ GRANDI solo in questa pagina */
+p, 
+.info-section p,
+.info-item p,
+.welcome-message,
+.back-btn,
+footer p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  p, 
+  .info-section p,
+  .info-item p,
+  .welcome-message,
+  .back-btn,
+  footer p {
+    font-size: 17px;
+  }
+}
+  /* 📏 TITOLI DEI BOX PIÙ GRANDI */
+.info-section h3,
+.map-header h3 {
+  font-size: 28px;        /* ↑ più grande */
+  line-height: 1.3;       /* un po' di spazio tra le righe */
+  margin-bottom: 15px;    /* stacca dal testo sotto */
+}
+
+/* 📱 Su mobile un pochino più piccoli, ma sempre ben leggibili */
+@media (max-width: 768px) {
+  .info-section h3,
+  .map-header h3 {
+    font-size: 24px;
+  }
+}
   </style>
 </head>
 <body>
