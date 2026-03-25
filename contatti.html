@@ -484,7 +484,7 @@
                   <i class="fas fa-sms"></i>
                   SMS
                 </a>
-                <a href="https://wa.me/393400500284?text=Ciao%20Elpidio,%20ti%20scrivo%20per%20il%20matrimonio!" class="contact-btn whatsapp">
+                <a href="#" class="contact-btn whatsapp" data-wa="393400500284" data-text="Ciao Elpidio, ti scrivo per il matrimonio!">
                   <i class="fab fa-whatsapp"></i>
                   WhatsApp
                 </a>
@@ -504,7 +504,7 @@
                   <i class="fas fa-sms"></i>
                   SMS
                 </a>
-                <a href="https://wa.me/393405266151?text=Ciao%20Cecilia,%20ti%20scrivo%20per%20il%20matrimonio!" class="contact-btn whatsapp">
+                <a href="#" class="contact-btn whatsapp" data-wa="393405266151" data-text="Ciao Cecilia, ti scrivo per il matrimonio!">
                   <i class="fab fa-whatsapp"></i>
                   WhatsApp
                 </a>
@@ -545,7 +545,7 @@
                   <i class="fas fa-sms"></i>
                   SMS
                 </a>
-                <a href="https://wa.me/393281078655?text=Ciao%20Elisabetta,%20ti%20scrivo%20per%20il%20matrimonio%20di%20Elpidio%20e%20Cecilia!" class="contact-btn whatsapp">
+                <a href="#" class="contact-btn whatsapp" data-wa="393281078655" data-text="Ciao Elisabetta, ti scrivo per il matrimonio di Elpidio e Cecilia!">
                   <i class="fab fa-whatsapp"></i>
                   WhatsApp
                 </a>
@@ -767,10 +767,34 @@
     if (resetContactBtn) {
       resetContactBtn.addEventListener('click', () => {
         resetContactFormToVisible();
-        // Se il box è chiuso, non facciamo nulla, ma se è aperto ripristiniamo il form
-        // Inoltre, se il box è chiuso, il reset non serve a molto, ma lo facciamo comunque per coerenza
       });
     }
+
+    // ========== NUOVA GESTIONE WHATSAPP CON FALLBACK ==========
+    document.querySelectorAll('.contact-btn.whatsapp').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const phone = this.getAttribute('data-wa');
+        const text = this.getAttribute('data-text') || '';
+        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+        const waAppUrl = `whatsapp://send?phone=${phone}&text=${encodeURIComponent(text)}`;
+        
+        // Tentativo di aprire l'app
+        let timeout = setTimeout(function() {
+          window.open(waUrl, '_blank');
+        }, 2000);
+        
+        // Se l'app si apre, il browser potrebbe lasciare la pagina e il timeout non si attiva
+        window.location.href = waAppUrl;
+        
+        // Quando il browser perde il focus (se l'app si apre) cancelliamo il timeout
+        window.onblur = function() {
+          clearTimeout(timeout);
+          window.onblur = null;
+        };
+      });
+    });
+    // ========== FINE GESTIONE WHATSAPP ==========
   </script>
   <script src="auth-check.js"></script>
 </body>
