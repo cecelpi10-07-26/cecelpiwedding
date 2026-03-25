@@ -651,40 +651,51 @@
       });
     }
 
-    // Mostra o nasconde il form contatti (pulsante "Contattaci")
+    // Elementi del form contatti
     const toggleContactFormBtn = document.getElementById('toggleContactForm');
     const googleContactForm = document.getElementById('googleContactForm');
     const contactSuccessMessage = document.getElementById('contact-success-message');
     const contactFormContainer = document.getElementById('contactFormContainer');
+    const contactForm = document.getElementById('contact-form');
 
+    // Funzione per resettare il form e prepararlo per la riapertura
+    function resetContactFormToVisible() {
+      // Nasconde il messaggio di successo
+      if (contactSuccessMessage) contactSuccessMessage.classList.remove('show');
+      // Mostra il container del form
+      if (contactFormContainer) contactFormContainer.style.display = 'block';
+      // Resetta i campi del form
+      if (contactForm) contactForm.reset();
+      // Rimuove eventuali errori visibili
+      document.querySelectorAll('.error-message.show').forEach(el => el.classList.remove('show'));
+      // Focus sul campo email (dopo che il box sarà visibile)
+      setTimeout(() => {
+        const emailField = document.getElementById('contact-email');
+        if (emailField) emailField.focus();
+      }, 100);
+    }
+
+    // Gestione click su "Contattaci"
     if (toggleContactFormBtn && googleContactForm) {
       toggleContactFormBtn.addEventListener('click', () => {
-        // Se il successo è visibile, lo nascondiamo e mostriamo il form
-        if (contactSuccessMessage.classList.contains('show')) {
-          contactSuccessMessage.classList.remove('show');
-        }
         const isHidden = googleContactForm.style.display === 'none' || googleContactForm.style.display === '';
         if (isHidden) {
+          // Apro il form: prima resetto tutto per essere sicuro di vedere il form pulito
+          resetContactFormToVisible();
           googleContactForm.style.display = 'block';
           toggleContactFormBtn.innerHTML = '<i class="fas fa-times"></i> Chiudi il form';
-          // Porta il focus sul campo email quando il form viene mostrato
-          setTimeout(() => {
-            const emailField = document.getElementById('contact-email');
-            if (emailField) emailField.focus();
-          }, 100);
         } else {
+          // Chiudo il form: lo nascondo e basta (senza resettare)
           googleContactForm.style.display = 'none';
           toggleContactFormBtn.innerHTML = '<i class="fas fa-envelope"></i> Contattaci';
         }
       });
     }
 
-    // Invio form contatti con gestione hide/show form e successo
-    const contactForm = document.getElementById('contact-form');
+    // Invio form contatti
     const contactSubmitBtn = document.getElementById('contact-submit-btn');
     const contactBtnText = document.getElementById('contact-btn-text');
     const contactBtnLoading = document.getElementById('contact-btn-loading');
-
     const contactGfForm = document.getElementById('contact-gf-form');
     const contactGfIframe = document.getElementById('contact-gf-iframe');
 
@@ -703,20 +714,8 @@
 
     // Mostra il messaggio di successo e nasconde il form
     function showContactSuccess() {
-      contactFormContainer.style.display = 'none';
-      contactSuccessMessage.classList.add('show');
-    }
-
-    // Resetta il form e lo mostra, nasconde il successo
-    function resetContactForm() {
-      contactSuccessMessage.classList.remove('show');
-      contactFormContainer.style.display = 'block';
-      contactForm.reset();
-      // Pulisce eventuali errori
-      document.querySelectorAll('.error-message.show').forEach(el => el.classList.remove('show'));
-      // Focus sul campo email
-      const emailField = document.getElementById('contact-email');
-      if (emailField) emailField.focus();
+      if (contactFormContainer) contactFormContainer.style.display = 'none';
+      if (contactSuccessMessage) contactSuccessMessage.classList.add('show');
     }
 
     if (contactForm) {
@@ -764,10 +763,14 @@
       });
     }
 
-    // Pulsante "Invia una nuova richiesta"
+    // Pulsante "Invia una nuova richiesta" (reset completo)
     const resetContactBtn = document.getElementById('reset-contact-btn');
     if (resetContactBtn) {
-      resetContactBtn.addEventListener('click', resetContactForm);
+      resetContactBtn.addEventListener('click', () => {
+        resetContactFormToVisible();
+        // Se il box è chiuso, non facciamo nulla, ma se è aperto ripristiniamo il form
+        // Inoltre, se il box è chiuso, il reset non serve a molto, ma lo facciamo comunque per coerenza
+      });
     }
   </script>
   <script src="auth-check.js"></script>
