@@ -514,11 +514,23 @@
       }
       
       // Esegui la ricerca dell'immagine
-      findImage();
-      
-      // Avvia l'effetto fuochi d'artificio pomposo
-      startPompousFireworks();
-    });
+findImage();
+
+// Avvia solo le fontane luminose per 1 secondo
+const overlay = document.getElementById('fireworks-overlay');
+startLightFountains(overlay);
+
+// Poi togli l'overlay
+setTimeout(() => {
+  overlay.style.transition = 'opacity 0.3s ease';
+  overlay.style.opacity = '0';
+
+  setTimeout(() => {
+    if (overlay.parentNode) {
+      overlay.remove();
+    }
+  }, 300);
+}, 1000);
 function startLightFountains(overlay) {
   const fountainColors = ['#FFD700', '#FFEC8B', '#FFFACD', '#D4AF37', '#F4E4A6'];
   const emitters = [0.14, 0.32, 0.5, 0.68, 0.86]; // punti da cui partono le fontane
