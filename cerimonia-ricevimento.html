@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>Cerimonia & Ricevimento — Elpidio & Cecilia</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=1">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=1">
   <meta name="description" content="Dettagli della cerimonia e ricevimento di matrimonio" />
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
   <meta name="googlebot" content="noindex, nofollow" />
@@ -110,12 +110,12 @@
     }
     
     .info-section h3 {
-  font-family: 'EB Garamond', serif;
-  font-size: 22px;
-  margin: 0 0 20px;
-  color: #222;
-  text-align: center;
-}
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      margin: 0 0 20px;
+      color: #222;
+      text-align: center;
+    }
     
     .info-row {
       display: flex;
@@ -264,8 +264,8 @@
       padding: 12px 24px;
       border-radius: 999px;
       border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(255, 248, 240, 0.7);
-  color: #222;
+      background: rgba(255, 248, 240, 0.7);
+      color: #222;
       font-weight: 700;
       text-decoration: none;
       box-shadow: 0 8px 20px rgba(0,0,0,0.05);
@@ -285,50 +285,50 @@
       color: #666;
     }
     /* 🌟 TUTTA LA PAGINA in EB Garamond, tranne il titolo principale */
-body, body *:not(h1) {
-  font-family: 'EB Garamond', serif;
-}
+    body, body *:not(h1) {
+      font-family: 'EB Garamond', serif;
+    }
     /* 📏 PARAGRAFI PIÙ GRANDI solo in questa pagina */
-p, 
-.info-section p,
-.info-item p,
-.welcome-message,
-.back-btn,
-footer p {
-  font-size: 18px;
-  line-height: 1.6;
-}
+    p, 
+    .info-section p,
+    .info-item p,
+    .welcome-message,
+    .back-btn,
+    footer p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
 
-@media (max-width: 768px) {
-  p, 
-  .info-section p,
-  .info-item p,
-  .welcome-message,
-  .back-btn,
-  footer p {
-    font-size: 20px;
-  }
-}
-      .rsvp-btn {
-    padding: 8px 18px;
-    font-size: 16px;
-  }
-  /* 📏 TITOLI DEI BOX PIÙ GRANDI */
-.info-section h3,
-.map-header h3 {
-  font-size: 28px;        /* ↑ più grande */
-  line-height: 1.3;       /* un po' di spazio tra le righe */
-  margin-bottom: 15px;    /* stacca dal testo sotto */
-}
+    @media (max-width: 768px) {
+      p, 
+      .info-section p,
+      .info-item p,
+      .welcome-message,
+      .back-btn,
+      footer p {
+        font-size: 20px;
+      }
+    }
+    .rsvp-btn {
+      padding: 8px 18px;
+      font-size: 16px;
+    }
+    /* 📏 TITOLI DEI BOX PIÙ GRANDI */
+    .info-section h3,
+    .map-header h3 {
+      font-size: 28px;
+      line-height: 1.3;
+      margin-bottom: 15px;
+    }
 
-/* 📱 Su mobile un pochino più piccoli, ma sempre ben leggibili */
-@media (max-width: 768px) {
-  .info-section h3,
-  .map-header h3 {
-    font-size: 24px;
-  }
-}
-        /* STILI PER IL BOTTONE RSVP (copiati da contatti.html) */
+    /* 📱 Su mobile un pochino più piccoli, ma sempre ben leggibili */
+    @media (max-width: 768px) {
+      .info-section h3,
+      .map-header h3 {
+        font-size: 24px;
+      }
+    }
+    /* STILI PER IL BOTTONE RSVP */
     .rsvp-button-container {
       text-align: center;
       margin: 30px 0;
@@ -353,7 +353,6 @@ footer p {
       box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
     }
     
-    /* Per mobile (opzionale, ma lo mettiamo per sicurezza) */
     @media (max-width: 600px) {
       .rsvp-btn {
         padding: 8px 18px;
@@ -363,6 +362,24 @@ footer p {
         margin-right: auto;
       }
     }
+
+    /* STILE PULSANTI PARCHEGGI */
+    .parking-btn {
+      background: #D4AF37;
+      border: none;
+      color: #222;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 12px 24px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .parking-btn:hover {
+      transform: translateY(-2px);
+      background: #F4E4A6;
+    }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -371,24 +388,20 @@ footer p {
   <!-- NAVBAR CON HAMBURGER MENU -->
   <nav class="nav">
     <div class="logo-badge" aria-label="Logo E e C">E&amp;C</div>
-    
-    <!-- Hamburger menu button (mobile only) -->
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    
-    <!-- Navigation links -->
     <div class="navlinks" id="navlinks">
-  <a href="index.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="rsvp.html">RSVP</a>
-  <a href="cerimonia-ricevimento.html">Cerimonia & Ricevimento</a>
-  <a href="storia.html">La nostra storia</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="lista-nozze.html">Lista Nozze</a>
-  <a href="contatti.html">Contatti</a>
-</div>
+      <a href="cerimonia-ricevimento.html">Cerimonia & Ricevimento</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="lista-nozze.html">Lista Nozze</a>
+      <a href="contatti.html">Contatti</a>
+    </div>
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -413,6 +426,16 @@ footer p {
             </div>
             <p><strong>Chiesa:</strong><br>Chiesa di San Sisto</p>
             <p><strong>Indirizzo:</strong><br>Via S. Sisto, 9, 29121 Piacenza PC</p>
+            
+            <!-- PULSANTI PARCHEGGI (aggiunti) -->
+            <div style="margin-top: 20px;">
+              <p><strong>Parcheggi consigliati:</strong></p>
+              <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <button class="parking-btn" data-park="P1" data-address="Via Enrico Morselli, 18-20, 29121 Piacenza PC">P1</button>
+                <button class="parking-btn" data-park="P2" data-address="Piazza Alessandro Casali, 29121 Piacenza PC">P2</button>
+                <button class="parking-btn" data-park="P3" data-address="Via Alessio Tramello, 15, 29121 Piacenza PC">P3</button>
+              </div>
+            </div>
           </div>
 
           <!-- MAPPA CHIESA -->
@@ -504,29 +527,30 @@ footer p {
             </div>
             <!-- Mobile apps selector (hidden by default) -->
             <div class="map-apps-tabs" id="villa-apps-tabs">
-  <h4>Scegli l'app di navigazione:</h4>
-  <div class="app-buttons">
-    <a href="#" class="nav-btn google" data-address="Via Guglielmo Marconi, 2, 26020 Bordolano CR" data-app="google">
-      <span class="nav-btn-icon">🏎️</span> Google Maps
-    </a>
-    <a href="#" class="nav-btn waze" data-address="Via Guglielmo Marconi, 2, 26020 Bordolano CR" data-app="waze">
-      <span class="nav-btn-icon">🚜</span> Waze
-    </a>
-    <a href="#" class="nav-btn apple" data-address="Via Guglielmo Marconi, 2, 26020 Bordolano CR" data-app="apple">
-      <span class="nav-btn-icon">🛩️</span> Apple Maps
-    </a>
-  </div>
-</div>
+              <h4>Scegli l'app di navigazione:</h4>
+              <div class="app-buttons">
+                <a href="#" class="nav-btn google" data-address="Via Guglielmo Marconi, 2, 26020 Bordolano CR" data-app="google">
+                  <span class="nav-btn-icon">🏎️</span> Google Maps
+                </a>
+                <a href="#" class="nav-btn waze" data-address="Via Guglielmo Marconi, 2, 26020 Bordolano CR" data-app="waze">
+                  <span class="nav-btn-icon">🚜</span> Waze
+                </a>
+                <a href="#" class="nav-btn apple" data-address="Via Guglielmo Marconi, 2, 26020 Bordolano CR" data-app="apple">
+                  <span class="nav-btn-icon">🛩️</span> Apple Maps
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-            <!-- PULSANTE RSVP -->
-<div class="rsvp-button-container">
-  <a href="rsvp.html" class="rsvp-btn">
-    <i class="fas fa-check-circle"></i>
-    Conferma la tua presenza
-  </a>
-</div>
+      
+      <!-- PULSANTE RSVP -->
+      <div class="rsvp-button-container">
+        <a href="rsvp.html" class="rsvp-btn">
+          <i class="fas fa-check-circle"></i>
+          Conferma la tua presenza
+        </a>
+      </div>
       <a href="index.html" class="back-btn">← Torna alla Home</a>
     </div>
   </main>
@@ -578,21 +602,21 @@ footer p {
 
     // Indirizzi REALI
     const locations = {
-  chiesa: {
-    address: "Via S. Sisto, 9, 29121 Piacenza PC",
-    name: "Chiesa di San Sisto",
-    google: "https://www.google.com/maps/dir/?api=1&destination=Via%20S.%20Sisto,%209,%2029121%20Piacenza%20PC",
-    waze: "https://www.waze.com/ul?q=Via%20S.%20Sisto%2C%209%2C%2029121%20Piacenza%20PC&navigate=yes",
-    apple: "https://maps.apple.com/?daddr=Via+S.+Sisto,+9,+29121+Piacenza+PC"
-  },
-  villa: {
-    address: "Via Guglielmo Marconi, 2, 26020 Bordolano CR",
-    name: "Villa Zaccaria",
-    google: "https://www.google.com/maps/dir/?api=1&destination=Via%20Guglielmo%20Marconi%2C%202%2C%2026020%20Bordolano%20CR",
-    waze: "https://www.waze.com/ul?q=Via%20Guglielmo%20Marconi%2C%202%2C%2026020%20Bordolano%20CR&navigate=yes",
-    apple: "https://maps.apple.com/?daddr=Via+Guglielmo+Marconi,+2,+26020+Bordolano+CR"
-  }
-};
+      chiesa: {
+        address: "Via S. Sisto, 9, 29121 Piacenza PC",
+        name: "Chiesa di San Sisto",
+        google: "https://www.google.com/maps/dir/?api=1&destination=Via%20S.%20Sisto,%209,%2029121%20Piacenza%20PC",
+        waze: "https://www.waze.com/ul?q=Via%20S.%20Sisto%2C%209%2C%2029121%20Piacenza%20PC&navigate=yes",
+        apple: "https://maps.apple.com/?daddr=Via+S.+Sisto,+9,+29121+Piacenza+PC"
+      },
+      villa: {
+        address: "Via Guglielmo Marconi, 2, 26020 Bordolano CR",
+        name: "Villa Zaccaria",
+        google: "https://www.google.com/maps/dir/?api=1&destination=Via%20Guglielmo%20Marconi%2C%202%2C%2026020%20Bordolano%20CR",
+        waze: "https://www.waze.com/ul?q=Via%20Guglielmo%20Marconi%2C%202%2C%2026020%20Bordolano%20CR&navigate=yes",
+        apple: "https://maps.apple.com/?daddr=Via+Guglielmo+Marconi,+2,+26020+Bordolano+CR"
+      }
+    };
 
     // Rileva se è mobile e sistema operativo
     function isMobile() {
@@ -684,90 +708,90 @@ footer p {
     window.addEventListener('DOMContentLoaded', function() {
       setupNavigationButtons();
     });
-    <!-- MODALE PER SCEGLIERE IL NAVIGATORE -->
-<div id="navModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; align-items: center; justify-content: center;">
-  <div style="background: white; border-radius: 24px; padding: 30px; max-width: 300px; text-align: center; font-family: 'EB Garamond', serif;">
-    <h3 style="margin-bottom: 20px;">Scegli il navigatore</h3>
-    <div style="display: flex; flex-direction: column; gap: 12px;">
-      <button id="modal-google" class="nav-btn google" style="background: #4285F4; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🗺️ Google Maps</button>
-      <button id="modal-waze" class="nav-btn waze" style="background: #33CCFF; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🚗 Waze</button>
-      <button id="modal-apple" class="nav-btn apple" style="background: black; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🍎 Apple Maps</button>
-      <button id="modal-cancel" style="background: #eee; padding: 10px; border-radius: 40px; border: none; font-size: 16px;">Annulla</button>
+  </script>
+
+  <!-- MODALE PER SCEGLIERE IL NAVIGATORE (parcheggi) -->
+  <div id="navModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; align-items: center; justify-content: center;">
+    <div style="background: white; border-radius: 24px; padding: 30px; max-width: 300px; text-align: center; font-family: 'EB Garamond', serif;">
+      <h3 style="margin-bottom: 20px;">Scegli il navigatore</h3>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <button id="modal-google" class="nav-btn google" style="background: #4285F4; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🗺️ Google Maps</button>
+        <button id="modal-waze" class="nav-btn waze" style="background: #33CCFF; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🚗 Waze</button>
+        <button id="modal-apple" class="nav-btn apple" style="background: black; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🍎 Apple Maps</button>
+        <button id="modal-cancel" style="background: #eee; padding: 10px; border-radius: 40px; border: none; font-size: 16px;">Annulla</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  // Funzione per capire se è un telefono o un computer
-  function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-           ('ontouchstart' in window) || 
-           (navigator.maxTouchPoints > 0);
-  }
-
-  // Aspetta che tutta la pagina sia pronta
-  document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('navModal');
-    const parkingBtns = document.querySelectorAll('.parking-btn');
-    let selectedAddress = '';
-
-    // Funzione per aprire il navigatore
-    function openNavigator(app, address) {
-      let url = '';
-      if (app === 'google') {
-        url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
-      } else if (app === 'waze') {
-        url = `https://www.waze.com/ul?q=${encodeURIComponent(address)}&navigate=yes`;
-      } else if (app === 'apple') {
-        url = `https://maps.apple.com/?daddr=${encodeURIComponent(address)}`;
-      }
-      window.open(url, '_blank');
+  <script>
+    // Funzione per capire se è un telefono o un computer
+    function isMobileDevice() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+             ('ontouchstart' in window) || 
+             (navigator.maxTouchPoints > 0);
     }
 
-    // Quando clicchi su P1, P2 o P3
-    parkingBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        selectedAddress = btn.getAttribute('data-address');
-        
-        // Se sei sul computer, apri Google Maps direttamente
-        if (!isMobileDevice()) {
-          openNavigator('google', selectedAddress);
-        } else {
-          // Se sei sul telefono, mostra la finestra con le tre scelte
-          modal.style.display = 'flex';
+    // Aspetta che tutta la pagina sia pronta
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('navModal');
+      const parkingBtns = document.querySelectorAll('.parking-btn');
+      let selectedAddress = '';
+
+      // Funzione per aprire il navigatore
+      function openNavigator(app, address) {
+        let url = '';
+        if (app === 'google') {
+          url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+        } else if (app === 'waze') {
+          url = `https://www.waze.com/ul?q=${encodeURIComponent(address)}&navigate=yes`;
+        } else if (app === 'apple') {
+          url = `https://maps.apple.com/?daddr=${encodeURIComponent(address)}`;
         }
+        window.open(url, '_blank');
+      }
+
+      // Quando clicchi su P1, P2 o P3
+      parkingBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          selectedAddress = btn.getAttribute('data-address');
+          
+          // Se sei sul computer, apri Google Maps direttamente
+          if (!isMobileDevice()) {
+            openNavigator('google', selectedAddress);
+          } else {
+            // Se sei sul telefono, mostra la finestra con le tre scelte
+            modal.style.display = 'flex';
+          }
+        });
       });
+
+      // Collega i bottoni della finestra
+      if (modal) {
+        document.getElementById('modal-google').addEventListener('click', () => {
+          openNavigator('google', selectedAddress);
+          modal.style.display = 'none';
+        });
+        document.getElementById('modal-waze').addEventListener('click', () => {
+          openNavigator('waze', selectedAddress);
+          modal.style.display = 'none';
+        });
+        document.getElementById('modal-apple').addEventListener('click', () => {
+          openNavigator('apple', selectedAddress);
+          modal.style.display = 'none';
+        });
+        document.getElementById('modal-cancel').addEventListener('click', () => {
+          modal.style.display = 'none';
+        });
+
+        // Se clicchi fuori dalla finestra, si chiude
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) modal.style.display = 'none';
+        });
+      }
     });
-
-    // Collega i bottoni della finestra
-    if (modal) {
-      document.getElementById('modal-google').addEventListener('click', () => {
-        openNavigator('google', selectedAddress);
-        modal.style.display = 'none';
-      });
-      document.getElementById('modal-waze').addEventListener('click', () => {
-        openNavigator('waze', selectedAddress);
-        modal.style.display = 'none';
-      });
-      document.getElementById('modal-apple').addEventListener('click', () => {
-        openNavigator('apple', selectedAddress);
-        modal.style.display = 'none';
-      });
-      document.getElementById('modal-cancel').addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
-
-      // Se clicchi fuori dalla finestra, si chiude
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-      });
-    }
-  });
-</script>
-</body>
-</html>
   </script>
+
   <script src="auth-check.js"></script>
 </body>
 </html>
