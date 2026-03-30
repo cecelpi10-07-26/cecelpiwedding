@@ -431,6 +431,16 @@
       border-radius: 12px;
       outline: none;
     }
+    /* Riduzione dimensioni video su mobile */
+@media (max-width: 768px) {
+  .video-modal-content {
+    max-width: 85vw;
+    max-height: 80vh;
+  }
+  .video-modal-content video {
+    max-height: 80vh;
+  }
+}
     .close-video {
   position: absolute;
   top: 20px;
