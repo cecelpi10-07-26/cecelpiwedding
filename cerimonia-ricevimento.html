@@ -363,23 +363,23 @@
       }
     }
 
-    /* STILE PULSANTI PARCHEGGI */
-    .parking-btn {
-      background: #D4AF37;
-      border: none;
-      color: #222;
-      font-weight: bold;
-      font-size: 20px;
-      padding: 12px 24px;
-      border-radius: 40px;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .parking-btn:hover {
-      transform: translateY(-2px);
-      background: #F4E4A6;
-    }
+    /* STILE PULSANTI PARCHEGGI (blu) */
+.parking-btn {
+  background: #4285F4;   /* blu Google Maps */
+  border: none;
+  color: white;          /* testo bianco per contrasto */
+  font-weight: bold;
+  font-size: 20px;
+  padding: 12px 24px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.parking-btn:hover {
+  transform: translateY(-2px);
+  background: #3367D6;   /* blu più scuro al passaggio */
+}
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -724,12 +724,18 @@
   </div>
 
   <script>
-    // Funzione per capire se è un telefono o un computer
-    function isMobileDevice() {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-             ('ontouchstart' in window) || 
-             (navigator.maxTouchPoints > 0);
-    }
+    // Funzione per capire se è un telefono o un computer (più precisa)
+function isMobileDevice() {
+  // Se l'user agent dice chiaramente che è un dispositivo mobile
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    return true;
+  }
+  // Se la larghezza dello schermo è piccola (≤ 768px) e il dispositivo supporta il touch
+  if (window.innerWidth <= 768 && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+    return true;
+  }
+  return false;
+}
 
     // Aspetta che tutta la pagina sia pronta
     document.addEventListener('DOMContentLoaded', function() {
