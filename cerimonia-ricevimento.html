@@ -363,6 +363,22 @@ footer p {
         margin-right: auto;
       }
     }
+    .parking-btn {
+  background: #D4AF37;
+  border: none;
+  color: #222;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 12px 24px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.parking-btn:hover {
+  transform: translateY(-2px);
+  background: #F4E4A6;
+}
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -413,6 +429,15 @@ footer p {
             </div>
             <p><strong>Chiesa:</strong><br>Chiesa di San Sisto</p>
             <p><strong>Indirizzo:</strong><br>Via S. Sisto, 9, 29121 Piacenza PC</p>
+            <!-- PULSANTI PARCHEGGI -->
+<div style="margin-top: 20px;">
+  <p><strong>Parcheggi consigliati:</strong></p>
+  <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+    <button class="parking-btn" data-park="P1" data-address="Via Enrico Morselli, 18-20, 29121 Piacenza PC">P1</button>
+    <button class="parking-btn" data-park="P2" data-address="Piazza Alessandro Casali, 29121 Piacenza PC">P2</button>
+    <button class="parking-btn" data-park="P3" data-address="Via Alessio Tramello, 15, 29121 Piacenza PC">P3</button>
+  </div>
+</div>
           </div>
 
           <!-- MAPPA CHIESA -->
@@ -684,7 +709,56 @@ footer p {
     window.addEventListener('DOMContentLoaded', function() {
       setupNavigationButtons();
     });
+    // PULSANTI PARCHEGGI E MODALE
+const modal = document.getElementById('navModal');
+const parkingBtns = document.querySelectorAll('.parking-btn');
+let selectedAddress = '';
+
+// Mostra modale quando si clicca su P1, P2 o P3
+parkingBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    selectedAddress = btn.getAttribute('data-address');
+    modal.style.display = 'flex';
+  });
+});
+
+// Funzione per aprire il navigatore scelto
+function openNavigator(app, address) {
+  let url = '';
+  if (app === 'google') {
+    url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+  } else if (app === 'waze') {
+    url = `https://www.waze.com/ul?q=${encodeURIComponent(address)}&navigate=yes`;
+  } else if (app === 'apple') {
+    url = `https://maps.apple.com/?daddr=${encodeURIComponent(address)}`;
+  }
+  window.open(url, '_blank');
+  modal.style.display = 'none'; // chiude modale dopo la scelta
+}
+
+// Collega i bottoni del modale
+document.getElementById('modal-google').addEventListener('click', () => openNavigator('google', selectedAddress));
+document.getElementById('modal-waze').addEventListener('click', () => openNavigator('waze', selectedAddress));
+document.getElementById('modal-apple').addEventListener('click', () => openNavigator('apple', selectedAddress));
+document.getElementById('modal-cancel').addEventListener('click', () => modal.style.display = 'none');
+
+// Chiudi modale cliccando fuori dalla finestra
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) modal.style.display = 'none';
+});
   </script>
   <script src="auth-check.js"></script>
+  <!-- MODALE PER SCEGLIERE IL NAVIGATORE -->
+<div id="navModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; align-items: center; justify-content: center;">
+  <div style="background: white; border-radius: 24px; padding: 30px; max-width: 300px; text-align: center; font-family: 'EB Garamond', serif;">
+    <h3 style="margin-bottom: 20px;">Scegli il navigatore</h3>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <button id="modal-google" class="nav-btn google" style="background: #4285F4; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🗺️ Google Maps</button>
+      <button id="modal-waze" class="nav-btn waze" style="background: #33CCFF; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🚗 Waze</button>
+      <button id="modal-apple" class="nav-btn apple" style="background: black; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🍎 Apple Maps</button>
+      <button id="modal-cancel" style="background: #eee; padding: 10px; border-radius: 40px; border: none; font-size: 16px;">Annulla</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
