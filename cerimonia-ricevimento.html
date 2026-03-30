@@ -433,8 +433,8 @@
     }
     .close-video {
       position: absolute;
-      top: -40px;
-      right: 0;
+      top: 20px;
+      right: 20px;
       background: none;
       border: none;
       color: white;
@@ -442,6 +442,7 @@
       cursor: pointer;
       font-weight: bold;
       opacity: 0.8;
+      z-index: 10002;
     }
     .close-video:hover {
       opacity: 1;
@@ -499,7 +500,7 @@
               <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <button class="parking-btn" data-park="P1" data-address="Via Enrico Morselli, 18-20, 29121 Piacenza PC">P1</button>
                 <button class="parking-btn" data-park="P2" data-address="Piazza Alessandro Casali, 29121 Piacenza PC">P2</button>
-                <button class="parking-btn" data-park="P3" data-address="Via Alessio Tramello, 29121 Piacenza PC">P3</button>
+                <button class="parking-btn" data-park="P3" data-address="Via Alessio Tramello, 15, 29121 Piacenza PC">P3</button>
               </div>
             </div>
           </div>
@@ -556,7 +557,7 @@
         <div class="full-column">
           <div class="info-section">
             <h3>Ricevimento</h3>
-                        <p><strong>VILLA ZACCARIA</strong></p>
+            <p><strong>VILLA ZACCARIA</strong></p>
             <p><strong>Indirizzo:</strong><br>Via Guglielmo Marconi, 2, 26020 Bordolano CR</p>
             <p><strong>Parcheggio:</strong><br>interno villa</p>
             <p><strong>Guarda il video per non perderti:</strong></p>
@@ -861,7 +862,7 @@
   <div id="videoModal">
     <div class="video-modal-content">
       <button class="close-video" id="closeVideoBtn">&times;</button>
-      <video id="villaVideo" controls preload="metadata">
+      <video id="villaVideo" controls preload="metadata" playsinline>
         <source src="videovilla.mp4" type="video/mp4">
         Il tuo browser non supporta il video.
       </video>
@@ -879,6 +880,8 @@
       videoBtn.addEventListener('click', () => {
         videoModal.style.display = 'flex';
         villaVideo.load();
+        // Avvia automaticamente il video
+        villaVideo.play().catch(e => console.log("Autoplay bloccato:", e));
       });
 
       closeVideoBtn.addEventListener('click', () => {
