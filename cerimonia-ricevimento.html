@@ -380,6 +380,71 @@
   transform: translateY(-2px);
   background: #3367D6;   /* blu più scuro al passaggio */
 }
+    /* Pulsante video */
+.video-btn {
+  background: #4285F4;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 12px 24px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: inline-block;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.video-btn:hover {
+  transform: translateY(-2px);
+  background: #3367D6;
+}
+
+/* Finestra modale video (sopra tutto) */
+#videoModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  z-index: 10001;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.video-modal-content {
+  background: #000;
+  border-radius: 16px;
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-modal-content video {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 12px;
+  outline: none;
+}
+.close-video {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 0.8;
+}
+.close-video:hover {
+  opacity: 1;
+}
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -493,6 +558,8 @@
             <p><strong>Nome:</strong><br>Villa Zaccaria</p>
             <p><strong>Parcheggio:</strong><br>interno villa</p>
             <p><strong>Indirizzo:</strong><br>Via Guglielmo Marconi, 2, 26020 Bordolano CR</p>
+            <p><strong>Guarda il video per non perderti:</strong></p>
+<button id="videoVillaBtn" class="video-btn">🎬 Villa</button>
           </div>
 
           <!-- MAPPA VILLA -->
@@ -796,6 +863,47 @@ function isMobileDevice() {
         });
       }
     });
+    <!-- MODALE VIDEO -->
+<div id="videoModal">
+  <div class="video-modal-content">
+    <button class="close-video" id="closeVideoBtn">&times;</button>
+    <video id="villaVideo" controls preload="metadata">
+      <source src="videovilla.mp4" type="video/mp4">
+      <!-- Se hai altri formati, aggiungi qui -->
+      Il tuo browser non supporta il video.
+    </video>
+  </div>
+</div>
+    // Gestione video Villa
+const videoBtn = document.getElementById('videoVillaBtn');
+const videoModal = document.getElementById('videoModal');
+const closeVideoBtn = document.getElementById('closeVideoBtn');
+const villaVideo = document.getElementById('villaVideo');
+
+if (videoBtn && videoModal && closeVideoBtn) {
+  // Apri la modale quando clicchi sul pulsante
+  videoBtn.addEventListener('click', () => {
+    videoModal.style.display = 'flex';
+    // Carica il video (se non era ancora caricato)
+    villaVideo.load();
+  });
+
+  // Chiudi la modale con la X
+  closeVideoBtn.addEventListener('click', () => {
+    videoModal.style.display = 'none';
+    villaVideo.pause();   // ferma il video
+    villaVideo.currentTime = 0; // riporta all'inizio
+  });
+
+  // Chiudi la modale se clicchi fuori dal video (sullo sfondo scuro)
+  videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+      videoModal.style.display = 'none';
+      villaVideo.pause();
+      villaVideo.currentTime = 0;
+    }
+  });
+}
   </script>
 
   <script src="auth-check.js"></script>
