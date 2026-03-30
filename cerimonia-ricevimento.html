@@ -684,6 +684,89 @@ footer p {
     window.addEventListener('DOMContentLoaded', function() {
       setupNavigationButtons();
     });
+    <!-- MODALE PER SCEGLIERE IL NAVIGATORE -->
+<div id="navModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; align-items: center; justify-content: center;">
+  <div style="background: white; border-radius: 24px; padding: 30px; max-width: 300px; text-align: center; font-family: 'EB Garamond', serif;">
+    <h3 style="margin-bottom: 20px;">Scegli il navigatore</h3>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <button id="modal-google" class="nav-btn google" style="background: #4285F4; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🗺️ Google Maps</button>
+      <button id="modal-waze" class="nav-btn waze" style="background: #33CCFF; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🚗 Waze</button>
+      <button id="modal-apple" class="nav-btn apple" style="background: black; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🍎 Apple Maps</button>
+      <button id="modal-cancel" style="background: #eee; padding: 10px; border-radius: 40px; border: none; font-size: 16px;">Annulla</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Funzione per capire se è un telefono o un computer
+  function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+           ('ontouchstart' in window) || 
+           (navigator.maxTouchPoints > 0);
+  }
+
+  // Aspetta che tutta la pagina sia pronta
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('navModal');
+    const parkingBtns = document.querySelectorAll('.parking-btn');
+    let selectedAddress = '';
+
+    // Funzione per aprire il navigatore
+    function openNavigator(app, address) {
+      let url = '';
+      if (app === 'google') {
+        url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+      } else if (app === 'waze') {
+        url = `https://www.waze.com/ul?q=${encodeURIComponent(address)}&navigate=yes`;
+      } else if (app === 'apple') {
+        url = `https://maps.apple.com/?daddr=${encodeURIComponent(address)}`;
+      }
+      window.open(url, '_blank');
+    }
+
+    // Quando clicchi su P1, P2 o P3
+    parkingBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        selectedAddress = btn.getAttribute('data-address');
+        
+        // Se sei sul computer, apri Google Maps direttamente
+        if (!isMobileDevice()) {
+          openNavigator('google', selectedAddress);
+        } else {
+          // Se sei sul telefono, mostra la finestra con le tre scelte
+          modal.style.display = 'flex';
+        }
+      });
+    });
+
+    // Collega i bottoni della finestra
+    if (modal) {
+      document.getElementById('modal-google').addEventListener('click', () => {
+        openNavigator('google', selectedAddress);
+        modal.style.display = 'none';
+      });
+      document.getElementById('modal-waze').addEventListener('click', () => {
+        openNavigator('waze', selectedAddress);
+        modal.style.display = 'none';
+      });
+      document.getElementById('modal-apple').addEventListener('click', () => {
+        openNavigator('apple', selectedAddress);
+        modal.style.display = 'none';
+      });
+      document.getElementById('modal-cancel').addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      // Se clicchi fuori dalla finestra, si chiude
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+    }
+  });
+</script>
+</body>
+</html>
   </script>
   <script src="auth-check.js"></script>
 </body>
