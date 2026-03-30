@@ -364,87 +364,88 @@
     }
 
     /* STILE PULSANTI PARCHEGGI (blu) */
-.parking-btn {
-  background: #4285F4;   /* blu Google Maps */
-  border: none;
-  color: white;          /* testo bianco per contrasto */
-  font-weight: bold;
-  font-size: 20px;
-  padding: 12px 24px;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.parking-btn:hover {
-  transform: translateY(-2px);
-  background: #3367D6;   /* blu più scuro al passaggio */
-}
-    /* Pulsante video */
-.video-btn {
-  background: #4285F4;
-  border: none;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 12px 24px;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: 0.2s;
-  display: inline-block;
-  margin-top: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.video-btn:hover {
-  transform: translateY(-2px);
-  background: #3367D6;
-}
+    .parking-btn {
+      background: #4285F4;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 12px 24px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .parking-btn:hover {
+      transform: translateY(-2px);
+      background: #3367D6;
+    }
 
-/* Finestra modale video (sopra tutto) */
-#videoModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-  z-index: 10001;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.video-modal-content {
-  background: #000;
-  border-radius: 16px;
-  max-width: 90vw;
-  max-height: 90vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.video-modal-content video {
-  max-width: 100%;
-  max-height: 90vh;
-  border-radius: 12px;
-  outline: none;
-}
-.close-video {
-  position: absolute;
-  top: -40px;
-  right: 0;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 32px;
-  cursor: pointer;
-  font-weight: bold;
-  opacity: 0.8;
-}
-.close-video:hover {
-  opacity: 1;
-}
+    /* Pulsante video */
+    .video-btn {
+      background: #4285F4;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 12px 24px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-block;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .video-btn:hover {
+      transform: translateY(-2px);
+      background: #3367D6;
+    }
+
+    /* Finestra modale video (sopra tutto) */
+    #videoModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10001;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .video-modal-content {
+      background: #000;
+      border-radius: 16px;
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-modal-content video {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      outline: none;
+    }
+    .close-video {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 32px;
+      cursor: pointer;
+      font-weight: bold;
+      opacity: 0.8;
+    }
+    .close-video:hover {
+      opacity: 1;
+    }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -492,7 +493,7 @@
             <p><strong>Chiesa:</strong><br>Chiesa di San Sisto</p>
             <p><strong>Indirizzo:</strong><br>Via S. Sisto, 9, 29121 Piacenza PC</p>
             
-            <!-- PULSANTI PARCHEGGI (aggiunti) -->
+            <!-- PULSANTI PARCHEGGI -->
             <div style="margin-top: 20px;">
               <p><strong>Parcheggi consigliati:</strong></p>
               <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
@@ -559,7 +560,9 @@
             <p><strong>Parcheggio:</strong><br>interno villa</p>
             <p><strong>Indirizzo:</strong><br>Via Guglielmo Marconi, 2, 26020 Bordolano CR</p>
             <p><strong>Guarda il video per non perderti:</strong></p>
-<button id="videoVillaBtn" class="video-btn">🎬 Villa</button>
+            <div style="text-align: center;">
+              <button id="videoVillaBtn" class="video-btn">🎬 Villa</button>
+            </div>
           </div>
 
           <!-- MAPPA VILLA -->
@@ -782,9 +785,9 @@
     <div style="background: white; border-radius: 24px; padding: 30px; max-width: 300px; text-align: center; font-family: 'EB Garamond', serif;">
       <h3 style="margin-bottom: 20px;">Scegli il navigatore</h3>
       <div style="display: flex; flex-direction: column; gap: 12px;">
-        <button id="modal-google" class="nav-btn google" style="background: #4285F4; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🏎️ Google Maps</button>
-        <button id="modal-waze" class="nav-btn waze" style="background: #33CCFF; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🚜 Waze</button>
-        <button id="modal-apple" class="nav-btn apple" style="background: black; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🛩️ Apple Maps</button>
+        <button id="modal-google" class="nav-btn google" style="background: #4285F4; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🗺️ Google Maps</button>
+        <button id="modal-waze" class="nav-btn waze" style="background: #33CCFF; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🚗 Waze</button>
+        <button id="modal-apple" class="nav-btn apple" style="background: black; color: white; padding: 12px; border-radius: 40px; border: none; font-size: 18px;">🍎 Apple Maps</button>
         <button id="modal-cancel" style="background: #eee; padding: 10px; border-radius: 40px; border: none; font-size: 16px;">Annulla</button>
       </div>
     </div>
@@ -792,25 +795,21 @@
 
   <script>
     // Funzione per capire se è un telefono o un computer (più precisa)
-function isMobileDevice() {
-  // Se l'user agent dice chiaramente che è un dispositivo mobile
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    return true;
-  }
-  // Se la larghezza dello schermo è piccola (≤ 768px) e il dispositivo supporta il touch
-  if (window.innerWidth <= 768 && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
-    return true;
-  }
-  return false;
-}
+    function isMobileDevice() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+      }
+      if (window.innerWidth <= 768 && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+        return true;
+      }
+      return false;
+    }
 
-    // Aspetta che tutta la pagina sia pronta
     document.addEventListener('DOMContentLoaded', function() {
       const modal = document.getElementById('navModal');
       const parkingBtns = document.querySelectorAll('.parking-btn');
       let selectedAddress = '';
 
-      // Funzione per aprire il navigatore
       function openNavigator(app, address) {
         let url = '';
         if (app === 'google') {
@@ -823,23 +822,18 @@ function isMobileDevice() {
         window.open(url, '_blank');
       }
 
-      // Quando clicchi su P1, P2 o P3
       parkingBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           selectedAddress = btn.getAttribute('data-address');
-          
-          // Se sei sul computer, apri Google Maps direttamente
           if (!isMobileDevice()) {
             openNavigator('google', selectedAddress);
           } else {
-            // Se sei sul telefono, mostra la finestra con le tre scelte
             modal.style.display = 'flex';
           }
         });
       });
 
-      // Collega i bottoni della finestra
       if (modal) {
         document.getElementById('modal-google').addEventListener('click', () => {
           openNavigator('google', selectedAddress);
@@ -856,54 +850,51 @@ function isMobileDevice() {
         document.getElementById('modal-cancel').addEventListener('click', () => {
           modal.style.display = 'none';
         });
-
-        // Se clicchi fuori dalla finestra, si chiude
         modal.addEventListener('click', (e) => {
           if (e.target === modal) modal.style.display = 'none';
         });
       }
     });
-    <!-- MODALE VIDEO -->
-<div id="videoModal">
-  <div class="video-modal-content">
-    <button class="close-video" id="closeVideoBtn">&times;</button>
-    <video id="villaVideo" controls preload="metadata">
-      <source src="videovilla.mp4" type="video/mp4">
-      <!-- Se hai altri formati, aggiungi qui -->
-      Il tuo browser non supporta il video.
-    </video>
+  </script>
+
+  <!-- MODALE VIDEO (fuori da qualsiasi script) -->
+  <div id="videoModal">
+    <div class="video-modal-content">
+      <button class="close-video" id="closeVideoBtn">&times;</button>
+      <video id="villaVideo" controls preload="metadata">
+        <source src="videovilla.mp4" type="video/mp4">
+        Il tuo browser non supporta il video.
+      </video>
+    </div>
   </div>
-</div>
+
+  <script>
     // Gestione video Villa
-const videoBtn = document.getElementById('videoVillaBtn');
-const videoModal = document.getElementById('videoModal');
-const closeVideoBtn = document.getElementById('closeVideoBtn');
-const villaVideo = document.getElementById('villaVideo');
+    const videoBtn = document.getElementById('videoVillaBtn');
+    const videoModal = document.getElementById('videoModal');
+    const closeVideoBtn = document.getElementById('closeVideoBtn');
+    const villaVideo = document.getElementById('villaVideo');
 
-if (videoBtn && videoModal && closeVideoBtn) {
-  // Apri la modale quando clicchi sul pulsante
-  videoBtn.addEventListener('click', () => {
-    videoModal.style.display = 'flex';
-    // Carica il video (se non era ancora caricato)
-    villaVideo.load();
-  });
+    if (videoBtn && videoModal && closeVideoBtn) {
+      videoBtn.addEventListener('click', () => {
+        videoModal.style.display = 'flex';
+        villaVideo.load();
+      });
 
-  // Chiudi la modale con la X
-  closeVideoBtn.addEventListener('click', () => {
-    videoModal.style.display = 'none';
-    villaVideo.pause();   // ferma il video
-    villaVideo.currentTime = 0; // riporta all'inizio
-  });
+      closeVideoBtn.addEventListener('click', () => {
+        videoModal.style.display = 'none';
+        villaVideo.pause();
+        villaVideo.currentTime = 0;
+      });
 
-  // Chiudi la modale se clicchi fuori dal video (sullo sfondo scuro)
-  videoModal.addEventListener('click', (e) => {
-    if (e.target === videoModal) {
-      videoModal.style.display = 'none';
-      villaVideo.pause();
-      villaVideo.currentTime = 0;
+      videoModal.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+          videoModal.style.display = 'none';
+          villaVideo.pause();
+          villaVideo.currentTime = 0;
+        }
+      });
     }
-  });
-}
   </script>
 
   <script src="auth-check.js"></script>
