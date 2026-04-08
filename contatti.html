@@ -261,6 +261,10 @@
       margin-bottom: 8px;
       color: #222;
     }
+    .form-group.required label::after {
+  content: " *";
+  color: #d32f2f;
+}
     .form-group input,
     .form-group textarea {
       width: 100%;
@@ -559,9 +563,9 @@
             <div class="form-container" id="contactFormContainer">
               <form id="contact-form" novalidate>
                 <!-- NUOVO CAMPO NOME E COGNOME -->
-  <div class="form-group">
+  <div class="form-group required">
     <label for="contact-name">Nome e Cognome</label>
-    <input type="text" id="contact-name" name="contact_name" placeholder="Mario Rossi" autocomplete="name" required>
+    <input type="text" id="contact-name" name="contact_name" placeholder="Nome e Cognome" autocomplete="name" required>
   <div class="error-message" id="contact-name-error">Inserisci il tuo nome e cognome</div>
   </div>
                 <div class="form-group">
