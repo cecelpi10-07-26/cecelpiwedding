@@ -558,6 +558,11 @@
           <div id="googleContactForm" class="google-form-box" style="display: none;">
             <div class="form-container" id="contactFormContainer">
               <form id="contact-form" novalidate>
+                <!-- NUOVO CAMPO NOME E COGNOME -->
+  <div class="form-group">
+    <label for="contact-name">Nome e Cognome</label>
+    <input type="text" id="contact-name" name="contact_name" placeholder="Mario Rossi" autocomplete="name" required>
+  </div>
                 <div class="form-group">
                   <label for="contact-email">Mail</label>
                   <input type="email" id="contact-email" name="contact_email" placeholder="nome@esempio.com" autocomplete="email">
@@ -601,6 +606,7 @@
   <iframe id="contact-gf-iframe" name="contact-gf-iframe" class="sr-only" title="Invio contatti" aria-hidden="true"></iframe>
 
   <form id="contact-gf-form" class="sr-only" method="POST" target="contact-gf-iframe" action="https://docs.google.com/forms/d/e/1FAIpQLSfMj7X64BN2i5Yd0XAHK1nmaac1ASERCFF5ISCADygQHjSJTw/formResponse">
+    <input type="text" name="entry.1324652193" id="gf_contact_name">
     <input type="text" name="entry.273851373" id="gf_contact_email">
     <input type="text" name="entry.526846608" id="gf_contact_phone">
     <textarea name="entry.393893523" id="gf_contact_message"></textarea>
@@ -721,6 +727,7 @@
       contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        const name = document.getElementById('contact-name').value.trim();
         const email = document.getElementById('contact-email').value.trim();
         const phone = document.getElementById('contact-phone').value.trim();
         const message = document.getElementById('contact-message').value.trim();
@@ -733,6 +740,7 @@
           if (emailError) emailError.classList.remove('show');
         }
 
+        document.getElementById('gf_contact_name').value = name;
         document.getElementById('gf_contact_email').value = email;
         document.getElementById('gf_contact_phone').value = phone;
         document.getElementById('gf_contact_message').value = message;
