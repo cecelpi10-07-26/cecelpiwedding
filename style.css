@@ -75,6 +75,55 @@ body {
 
 /* Se vuoi che l'immagine copra tutto lo spazio, usa background-size: cover; */
 
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.nav-countdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background: rgba(255, 248, 240, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  white-space: nowrap;
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  line-height: 1;
+}
+
+.countdown-box span {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+.countdown-box small {
+  margin-top: 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(34, 34, 34, 0.82);
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+}
+
+
 /* HAMBURGER MENU - VISIBILE SOLO SU MOBILE */
 .hamburger {
   display: none;
@@ -214,6 +263,31 @@ body {
     border-radius: 0; /* Cambiato da 15px a 0 */
     /* border: 1.5px solid #D4AF37; RIMOSSO - commenta o elimina questa riga */
   }
+
+  .nav-left {
+    gap: 8px;
+    max-width: calc(100% - 56px);
+  }
+
+  .nav-countdown {
+    gap: 4px;
+    padding: 4px 6px;
+    border-radius: 10px;
+  }
+
+  .countdown-box {
+    min-width: 24px;
+  }
+
+  .countdown-box span {
+    font-size: 11px;
+  }
+
+  .countdown-box small {
+    font-size: 7px;
+    margin-top: 1px;
+  }
+
   .navlinks {
     position: fixed;
     top: 80px;
@@ -348,3 +422,23 @@ a, button {
     margin-bottom: 10px;
     line-height: 1.1;
   }
+
+
+@media (max-width: 480px) {
+  .nav-countdown {
+    gap: 3px;
+    padding: 3px 5px;
+  }
+
+  .countdown-box {
+    min-width: 21px;
+  }
+
+  .countdown-box span {
+    font-size: 10px;
+  }
+
+  .countdown-box small {
+    font-size: 6px;
+  }
+}
