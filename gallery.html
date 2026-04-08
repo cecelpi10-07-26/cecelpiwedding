@@ -635,5 +635,20 @@ lightbox.addEventListener('click', function(e) {
     document.addEventListener('DOMContentLoaded', loadImagesWithFallback);
   </script>
   <script src="auth-check.js"></script>
+  // Fix per Safari: rende cliccabile il link con target="_blank"
+document.addEventListener('DOMContentLoaded', function() {
+  const uploadLink = document.getElementById('upload-link');
+  if (uploadLink) {
+    uploadLink.addEventListener('click', function(e) {
+      e.preventDefault();               // blocca il comportamento normale
+      const url = this.href;
+      // Prova ad aprire in una nuova scheda; se bloccato, apri nella stessa
+      const newWindow = window.open(url, '_blank');
+      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+        window.location.href = url;      // fallback: stessa scheda
+      }
+    });
+  }
+});
 </body>
 </html>
