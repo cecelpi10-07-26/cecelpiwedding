@@ -562,6 +562,7 @@
   <div class="form-group">
     <label for="contact-name">Nome e Cognome</label>
     <input type="text" id="contact-name" name="contact_name" placeholder="Mario Rossi" autocomplete="name" required>
+  <div class="error-message" id="contact-name-error">Inserisci il tuo nome e cognome</div>
   </div>
                 <div class="form-group">
                   <label for="contact-email">Mail</label>
@@ -731,7 +732,16 @@
         const email = document.getElementById('contact-email').value.trim();
         const phone = document.getElementById('contact-phone').value.trim();
         const message = document.getElementById('contact-message').value.trim();
+        const nameError = document.getElementById('contact-name-error');
         const emailError = document.getElementById('contact-email-error');
+
+// Controllo Nome (obbligatorio)
+if (name === '') {
+  if (nameError) nameError.classList.add('show');
+  return; // Blocca l'invio
+} else {
+  if (nameError) nameError.classList.remove('show');
+}
 
         if (email && !isValidEmail(email)) {
           if (emailError) emailError.classList.add('show');
@@ -739,7 +749,7 @@
         } else {
           if (emailError) emailError.classList.remove('show');
         }
-
+        
         document.getElementById('gf_contact_name').value = name;
         document.getElementById('gf_contact_email').value = email;
         document.getElementById('gf_contact_phone').value = phone;
