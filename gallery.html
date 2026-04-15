@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <title>Gallery — Elpidio & Cecilia</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=1">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=1">
   <meta name="description" content="Gallery fotografica di Elpidio e Cecilia" />
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
   <meta name="googlebot" content="noindex, nofollow" />
@@ -157,17 +157,16 @@
       display: block;
     }
     .photo-item img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 16px;
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.photo-item:hover img {
-  transform: scale(1.02);           /* la foto si ingrandisce leggermente */
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-}
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 16px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .photo-item:hover img {
+      transform: scale(1.02);           /* la foto si ingrandisce leggermente */
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
     .back-btn {
       display: block;
       width: fit-content;
@@ -196,7 +195,7 @@
       color: #666;
     }
 
-    /* ===== LIGHTBOX ===== */
+    /* ===== LIGHTBOX (MODIFICATO COME RICHIESTO) ===== */
     .lightbox {
       display: none;
       position: fixed;
@@ -230,32 +229,37 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       pointer-events: none;
     }
+    /* Pulsante di chiusura: ora uguale a quello del video */
     .lightbox-close {
       position: absolute;
-      top: -40px;
-      right: 0;
-      background: transparent;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.5);
       border: none;
       color: white;
-      font-size: 40px;
+      font-size: 32px;
       cursor: pointer;
-      width: 50px;
-      height: 50px;
+      font-weight: bold;
+      opacity: 0.8;
+      z-index: 2001;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: opacity 0.2s;
-      opacity: 0.8;
-      z-index: 2001;
     }
     .lightbox-close:hover {
       opacity: 1;
+      background: rgba(0,0,0,0.7);
     }
+    /* Frecce di navigazione: sfondo scuro come la X (opzionale ma consigliato) */
     .lightbox-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.5);
       border: none;
       color: white;
       font-size: 40px;
@@ -271,7 +275,7 @@
       z-index: 2001;
     }
     .lightbox-nav:hover {
-      background: rgba(255,255,255,0.4);
+      background: rgba(0,0,0,0.7);
       opacity: 1;
     }
     .lightbox-prev {
@@ -286,15 +290,7 @@
         height: 40px;
         font-size: 30px;
       }
-      .lightbox-close {
-        top: 10px;
-        right: 10px;
-        font-size: 40px;
-        background: rgba(0,0,0,0.3);
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-      }
+      /* Rimossa regola duplicata per .lightbox-close: ora usa sempre quella sopra */
     }
 
     /* Responsive per mobile (sezione QR) */
@@ -316,12 +312,12 @@
         margin-right: 0;
       }
       .btn-gold {
-  width: auto;
-  display: inline-block;
-  font-size: 12px;
-  padding: 10px 20px;
-  margin: 0 auto;  /* centrato grazie al contenitore flex */
-}
+        width: auto;
+        display: inline-block;
+        font-size: 12px;
+        padding: 10px 20px;
+        margin: 0 auto;  /* centrato grazie al contenitore flex */
+      }
       .momenti-title {
         font-size: 24px;
       }
@@ -367,14 +363,14 @@
       <span></span>
     </button>
     <div class="navlinks" id="navlinks">
-  <a href="index.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="rsvp.html">RSVP</a>
-  <a href="cerimonia-ricevimento.html">Cerimonia & Ricevimento</a>
-  <a href="storia.html">La nostra storia</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="lista-nozze.html">Lista Nozze</a>
-    <a href="contatti.html">Contatti</a>
-</div>
+      <a href="cerimonia-ricevimento.html">Cerimonia & Ricevimento</a>
+      <a href="storia.html">La nostra storia</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="lista-nozze.html">Lista Nozze</a>
+      <a href="contatti.html">Contatti</a>
+    </div>
   </nav>
 
   <!-- MAIN CONTENT -->
@@ -385,21 +381,20 @@
       
       <!-- BLOCCO QR CODE + PULSANTE -->
       <div class="qr-upload-section">
-  <div class="qr-image-container">
-    <img src="qrcodefotovideo.png" alt="QR code per caricare foto e video del matrimonio su MEGA">
-  </div>
-
-  <div class="qr-button">
-    <a href="https://mega.nz/filerequest/wfNh1VE09kw" class="btn-gold" target="_blank" rel="noopener noreferrer" id="upload-link">
-      Carica qui le tue foto/video
-    </a>
-  </div>
-</div>
+        <div class="qr-image-container">
+          <img src="qrcodefotovideo.png" alt="QR code per caricare foto e video del matrimonio su MEGA">
+        </div>
+        <div class="qr-button">
+          <a href="https://mega.nz/filerequest/wfNh1VE09kw" class="btn-gold" target="_blank" rel="noopener noreferrer" id="upload-link">
+            Carica qui le tue foto/video
+          </a>
+        </div>
+      </div>
 
       <!-- TITOLO -->
       <h2 class="momenti-title">Alcuni momenti speciali</h2>
       
-      <!-- GALLERY GRID con 8 foto (caricate dinamicamente) - ora le foto sono intere e ridimensionate -->
+      <!-- GALLERY GRID con 8 foto (caricate dinamicamente) -->
       <div class="photo-grid">
         <div class="photo-item"><img class="gallery-img" data-base="gallery1" alt="Foto 1"></div>
         <div class="photo-item"><img class="gallery-img" data-base="gallery2" alt="Foto 2"></div>
@@ -528,7 +523,7 @@
     // Variabili per il touch swipe
     let touchStartX = 0;
     let touchEndX = 0;
-    const minSwipeDistance = 50; // distanza minima per considerare uno swipe
+    const minSwipeDistance = 50;
 
     function openLightbox(index) {
       currentIndex = index;
@@ -592,17 +587,15 @@
     });
 
     // Chiudi la lightbox se si clicca fuori dall'immagine e dai pulsanti
-lightbox.addEventListener('click', function(e) {
-  // Se il clic è avvenuto sulla foto, su una freccia o sulla X (o su un loro figlio), non fare niente
-  if (e.target.closest('.lightbox-image') || 
-      e.target.closest('.lightbox-prev') || 
-      e.target.closest('.lightbox-next') || 
-      e.target.closest('.lightbox-close')) {
-    return; // Esce dalla funzione, quindi non chiude
-  }
-  // Altrimenti (clic sullo sfondo nero), chiudi
-  closeLightbox();
-});
+    lightbox.addEventListener('click', function(e) {
+      if (e.target.closest('.lightbox-image') || 
+          e.target.closest('.lightbox-prev') || 
+          e.target.closest('.lightbox-next') || 
+          e.target.closest('.lightbox-close')) {
+        return;
+      }
+      closeLightbox();
+    });
 
     // Chiudi con ESC
     document.addEventListener('keydown', (e) => {
@@ -626,10 +619,8 @@ lightbox.addEventListener('click', function(e) {
       if (Math.abs(distance) < minSwipeDistance) return;
 
       if (distance > 0) {
-        // Swipe verso destra → immagine precedente
         prevBtn.click();
       } else {
-        // Swipe verso sinistra → immagine successiva
         nextBtn.click();
       }
     }
@@ -638,21 +629,20 @@ lightbox.addEventListener('click', function(e) {
   </script>
   <script src="auth-check.js"></script>
   <script>
-  // Fix per Safari: rende cliccabile il link con target="_blank"
-document.addEventListener('DOMContentLoaded', function() {
-  const uploadLink = document.getElementById('upload-link');
-  if (uploadLink) {
-    uploadLink.addEventListener('click', function(e) {
-      e.preventDefault();               // blocca il comportamento normale
-      const url = this.href;
-      // Prova ad aprire in una nuova scheda; se bloccato, apri nella stessa
-      const newWindow = window.open(url, '_blank');
-      if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-        window.location.href = url;      // fallback: stessa scheda
+    // Fix per Safari: rende cliccabile il link con target="_blank"
+    document.addEventListener('DOMContentLoaded', function() {
+      const uploadLink = document.getElementById('upload-link');
+      if (uploadLink) {
+        uploadLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          const url = this.href;
+          const newWindow = window.open(url, '_blank');
+          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+            window.location.href = url;
+          }
+        });
       }
     });
-  }
-});
-</script>
+  </script>
 </body>
 </html>
