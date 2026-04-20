@@ -447,6 +447,18 @@
   <!-- NAVBAR CON HAMBURGER MENU -->
   <nav class="nav">
     <div class="logo-badge" aria-label="Logo E e C">E&amp;C</div>
+      <!-- COUNTDOWN METALLIZZATO -->
+  <div class="nav-countdown" id="navCountdown">
+    <div class="countdown-row">
+      <div class="cd-item"><span class="cd-number" id="cd-days">00</span><span class="cd-label">d</span></div>
+      <span class="sep">|</span>
+      <div class="cd-item"><span class="cd-number" id="cd-hours">00</span><span class="cd-label">h</span></div>
+      <span class="sep">|</span>
+      <div class="cd-item"><span class="cd-number" id="cd-minutes">00</span><span class="cd-label">m</span></div>
+      <span class="sep">|</span>
+      <div class="cd-item"><span class="cd-number" id="cd-seconds">00</span><span class="cd-label">s</span></div>
+    </div>
+  </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span>
       <span></span>
@@ -819,5 +831,37 @@ if (name === '') {
     // ========== FINE GESTIONE WHATSAPP ==========
   </script>
   <script src="auth-check.js"></script>
+    <!-- SCRIPT COUNTDOWN -->
+  <script>
+    (function() {
+      const targetDate = new Date(2026, 6, 10, 0, 0, 0); // 10 luglio 2026
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById('cd-days').textContent = '00';
+          document.getElementById('cd-hours').textContent = '00';
+          document.getElementById('cd-minutes').textContent = '00';
+          document.getElementById('cd-seconds').textContent = '00';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (86400000)) / (3600000));
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
 </body>
 </html>
