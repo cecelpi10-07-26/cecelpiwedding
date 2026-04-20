@@ -369,6 +369,7 @@ a, button {
 }
 
 .nav-countdown .cd-number {
+  font-family: 'EB Garamond', serif;
   font-weight: 700;
   font-size: 20px;      /* NUMERI PIÙ GRANDI */
   color: #222222;        /* NERO invece di oro metallizzato */
