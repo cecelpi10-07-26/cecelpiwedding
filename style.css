@@ -348,3 +348,58 @@ a, button {
     margin-bottom: 10px;
     line-height: 1.1;
   }
+/* ----- COUNTDOWN NELLA NAVBAR (Stile Metallizzato n.8) ----- */
+.nav-countdown {
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+}
+
+.countdown-row {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.nav-countdown .cd-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.nav-countdown .cd-number {
+  font-weight: 700;
+  font-size: 18px;
+  background: linear-gradient(135deg, #D4AF37, #F4E4A6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-countdown .cd-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #777;
+}
+
+.nav-countdown .sep {
+  font-size: 16px;
+  font-weight: 300;
+  color: #D4AF37;
+  margin: 0 2px;
+}
+
+/* Su schermi piccoli (cellulare) rimpicciolisce un po' */
+@media (max-width: 1024px) {
+  .nav-countdown {
+    margin: 0 10px;
+  }
+  .nav-countdown .cd-number {
+    font-size: 16px;
+  }
+  .nav-countdown .sep {
+    font-size: 14px;
+  }
+}
