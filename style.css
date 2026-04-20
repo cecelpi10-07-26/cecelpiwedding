@@ -348,7 +348,7 @@ a, button {
     margin-bottom: 10px;
     line-height: 1.1;
   }
-/* ----- COUNTDOWN NELLA NAVBAR (Stile Metallizzato n.8) ----- */
+/* ----- COUNTDOWN NELLA NAVBAR (Stile nero, più grande) ----- */
 .nav-countdown {
   display: flex;
   align-items: center;
@@ -358,7 +358,7 @@ a, button {
 .countdown-row {
   display: flex;
   align-items: baseline;
-  gap: 5px;
+  gap: 8px;  /* un po' più spazio tra i blocchi */
 }
 
 .nav-countdown .cd-item {
@@ -370,36 +370,38 @@ a, button {
 
 .nav-countdown .cd-number {
   font-weight: 700;
-  font-size: 18px;
-  background: linear-gradient(135deg, #D4AF37, #F4E4A6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-size: 24px;      /* NUMERI PIÙ GRANDI */
+  color: #222222;        /* NERO invece di oro metallizzato */
+  line-height: 1;
 }
 
 .nav-countdown .cd-label {
-  font-size: 8px;
+  font-size: 10px;       /* ETICHETTE LEGGERMENTE PIÙ GRANDI */
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
   color: #777;
+  margin-top: 2px;
 }
 
 .nav-countdown .sep {
-  font-size: 16px;
+  font-size: 20px;       /* SEPARATORE PIÙ GRANDE */
   font-weight: 300;
-  color: #D4AF37;
+  color: #D4AF37;        /* il separatore resta dorato */
   margin: 0 2px;
 }
 
-/* Su schermi piccoli (cellulare) rimpicciolisce un po' */
+/* Su schermi piccoli (cellulare) */
 @media (max-width: 1024px) {
   .nav-countdown {
     margin: 0 10px;
   }
   .nav-countdown .cd-number {
-    font-size: 16px;
+    font-size: 20px;      /* un po' più piccolo su mobile ma comunque leggibile */
+  }
+  .nav-countdown .cd-label {
+    font-size: 9px;
   }
   .nav-countdown .sep {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
