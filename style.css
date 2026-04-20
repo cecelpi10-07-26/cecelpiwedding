@@ -370,7 +370,7 @@ a, button {
 
 .nav-countdown .cd-number {
   font-weight: 700;
-  font-size: 24px;      /* NUMERI PIÙ GRANDI */
+  font-size: 20px;      /* NUMERI PIÙ GRANDI */
   color: #222222;        /* NERO invece di oro metallizzato */
   line-height: 1;
 }
