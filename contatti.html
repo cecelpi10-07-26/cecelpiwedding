@@ -46,7 +46,7 @@
       padding: 0 20px;
     }
     .contact-card {
-      background: var(--panel-bg);
+      background: rgba(255, 248, 240, 0.7);
       border: 1px solid var(--panel-border);
       border-radius: 24px;
       padding: clamp(30px, 5vw, 50px);
@@ -574,12 +574,12 @@
           <div id="googleContactForm" class="google-form-box" style="display: none;">
             <div class="form-container" id="contactFormContainer">
               <form id="contact-form" novalidate>
-                <!-- NUOVO CAMPO NOME E COGNOME -->
-  <div class="form-group required">
-    <label for="contact-name">Nome e Cognome</label>
-    <input type="text" id="contact-name" name="contact_name" placeholder="Nome e Cognome" autocomplete="name" required>
-  <div class="error-message" id="contact-name-error">Inserisci il tuo nome e cognome</div>
-  </div>
+                <!-- CAMPO NOME E COGNOME -->
+                <div class="form-group required">
+                  <label for="contact-name">Nome e Cognome</label>
+                  <input type="text" id="contact-name" name="contact_name" placeholder="Nome e Cognome" autocomplete="name" required>
+                  <div class="error-message" id="contact-name-error">Inserisci il tuo nome e cognome</div>
+                </div>
                 <div class="form-group">
                   <label for="contact-email">Mail</label>
                   <input type="email" id="contact-email" name="contact_email" placeholder="nome@esempio.com" autocomplete="email">
@@ -620,14 +620,6 @@
 
   <!-- BACK TO TOP BUTTON -->
   <button class="back-to-top" id="backToTop" aria-label="Torna all'inizio" title="Torna su">▲</button>
-  <iframe id="contact-gf-iframe" name="contact-gf-iframe" class="sr-only" title="Invio contatti" aria-hidden="true"></iframe>
-
-  <form id="contact-gf-form" class="sr-only" method="POST" target="contact-gf-iframe" action="https://docs.google.com/forms/d/e/1FAIpQLSfMj7X64BN2i5Yd0XAHK1nmaac1ASERCFF5ISCADygQHjSJTw/formResponse">
-    <input type="text" name="entry.1324652193" id="gf_contact_name">
-    <input type="text" name="entry.273851373" id="gf_contact_email">
-    <input type="text" name="entry.526846608" id="gf_contact_phone">
-    <textarea name="entry.393893523" id="gf_contact_message"></textarea>
-  </form>
 
   <script>
     // Anno corrente
@@ -682,15 +674,10 @@
 
     // Funzione per resettare il form e prepararlo per la riapertura
     function resetContactFormToVisible() {
-      // Nasconde il messaggio di successo
       if (contactSuccessMessage) contactSuccessMessage.classList.remove('show');
-      // Mostra il container del form
       if (contactFormContainer) contactFormContainer.style.display = 'block';
-      // Resetta i campi del form
       if (contactForm) contactForm.reset();
-      // Rimuove eventuali errori visibili
       document.querySelectorAll('.error-message.show').forEach(el => el.classList.remove('show'));
-      // Focus sul campo email (dopo che il box sarà visibile)
       setTimeout(() => {
         const nameField = document.getElementById('contact-name');
         if (nameField) nameField.focus();
@@ -702,26 +689,20 @@
       toggleContactFormBtn.addEventListener('click', () => {
         const isHidden = googleContactForm.style.display === 'none' || googleContactForm.style.display === '';
         if (isHidden) {
-          // Apro il form: prima resetto tutto per essere sicuro di vedere il form pulito
           resetContactFormToVisible();
           googleContactForm.style.display = 'block';
           toggleContactFormBtn.innerHTML = '<i class="fas fa-times"></i> Chiudi il form';
         } else {
-          // Chiudo il form: lo nascondo e basta (senza resettare)
           googleContactForm.style.display = 'none';
           toggleContactFormBtn.innerHTML = '<i class="fas fa-envelope"></i> Contattaci';
         }
       });
     }
 
-    // Invio form contatti
+    // Invio form contatti (nuovo sistema affidabile)
     const contactSubmitBtn = document.getElementById('contact-submit-btn');
     const contactBtnText = document.getElementById('contact-btn-text');
     const contactBtnLoading = document.getElementById('contact-btn-loading');
-    const contactGfForm = document.getElementById('contact-gf-form');
-    const contactGfIframe = document.getElementById('contact-gf-iframe');
-
-    let pendingContactSubmit = false;
 
     function isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -751,48 +732,51 @@
         const nameError = document.getElementById('contact-name-error');
         const emailError = document.getElementById('contact-email-error');
 
-// Controllo Nome (obbligatorio)
-if (name === '') {
-  if (nameError) nameError.classList.add('show');
-  return; // Blocca l'invio
-} else {
-  if (nameError) nameError.classList.remove('show');
-}
+        // Controllo Nome (obbligatorio)
+        if (name === '') {
+          if (nameError) nameError.classList.add('show');
+          return;
+        } else {
+          if (nameError) nameError.classList.remove('show');
+        }
 
+        // Controllo email se inserita
         if (email && !isValidEmail(email)) {
           if (emailError) emailError.classList.add('show');
           return;
         } else {
           if (emailError) emailError.classList.remove('show');
         }
-        
-        document.getElementById('gf_contact_name').value = name;
-        document.getElementById('gf_contact_email').value = email;
-        document.getElementById('gf_contact_phone').value = phone;
-        document.getElementById('gf_contact_message').value = message;
 
-        pendingContactSubmit = true;
+        // Dati da inviare al server
+        const data = {
+          nome: name,
+          email: email,
+          telefono: phone,
+          messaggio: message
+        };
+
         setContactLoading(true);
-        contactGfForm.submit();
 
-        // Fallback per sicurezza
-        setTimeout(() => {
-          if (!pendingContactSubmit) return;
-          pendingContactSubmit = false;
+        // URL del nuovo script (DA PERSONALIZZARE!)
+        const SCRIPT_URL_CONTATTI = 'https://script.google.com/macros/s/.../exec'; // ← INSERISCI QUI IL TUO URL
+
+        fetch(SCRIPT_URL_CONTATTI, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(() => {
           setContactLoading(false);
           showContactSuccess();
           contactForm.reset();
-        }, 2500);
-      });
-    }
-
-    if (contactGfIframe) {
-      contactGfIframe.addEventListener('load', () => {
-        if (!pendingContactSubmit) return;
-        pendingContactSubmit = false;
-        setContactLoading(false);
-        showContactSuccess();
-        contactForm.reset();
+        })
+        .catch(error => {
+          console.error('Errore invio:', error);
+          setContactLoading(false);
+          alert('Si è verificato un errore durante l\'invio. Per favore riprova o contattaci direttamente.');
+        });
       });
     }
 
@@ -804,7 +788,7 @@ if (name === '') {
       });
     }
 
-    // ========== NUOVA GESTIONE WHATSAPP CON FALLBACK ==========
+    // ========== GESTIONE WHATSAPP CON FALLBACK ==========
     document.querySelectorAll('.contact-btn.whatsapp').forEach(btn => {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -813,22 +797,18 @@ if (name === '') {
         const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
         const waAppUrl = `whatsapp://send?phone=${phone}&text=${encodeURIComponent(text)}`;
         
-        // Tentativo di aprire l'app
         let timeout = setTimeout(function() {
           window.open(waUrl, '_blank');
         }, 2000);
         
-        // Se l'app si apre, il browser potrebbe lasciare la pagina e il timeout non si attiva
         window.location.href = waAppUrl;
         
-        // Quando il browser perde il focus (se l'app si apre) cancelliamo il timeout
         window.onblur = function() {
           clearTimeout(timeout);
           window.onblur = null;
         };
       });
     });
-    // ========== FINE GESTIONE WHATSAPP ==========
   </script>
   <script src="auth-check.js"></script>
     <!-- SCRIPT COUNTDOWN -->
