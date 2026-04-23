@@ -465,23 +465,6 @@
   <!-- BACK TO TOP BUTTON -->
   <button class="back-to-top" id="backToTop" aria-label="Torna all'inizio" title="Torna su">▲</button>
 
-  <!-- IFRAME nascosto per invio Google Forms -->
-  <iframe id="gf-iframe" name="gf-iframe" class="sr-only" title="Invio RSVP" aria-hidden="true"></iframe>
-
-  <!-- FORM nascosto: qui mettiamo gli entry.* del Google Form -->
-  <form id="gf-form" class="sr-only" method="POST" target="gf-iframe" action="https://docs.google.com/forms/d/e/1FAIpQLSetEMlIdiONOtjCuF9BZ8EZt8KKcsU4afwggASHNcQRDoukCg/formResponse">
-    <input type="text" name="entry.738591272" id="gf_nome">
-    <input type="text" name="entry.1275687098" id="gf_cognome">
-    <input type="text" name="entry.959844416" id="gf_email">
-    <input type="text" name="entry.281060993" id="gf_telefono">
-    <input type="text" name="entry.1192058120" id="gf_numero_adulti">
-    <input type="text" name="entry.1927491626" id="gf_numero_bambini">
-    <input type="text" name="entry.579231647" id="gf_partecipazione">
-    <textarea name="entry.605281712" id="gf_note"></textarea>
-    <textarea name="entry.1427081091" id="gf_messaggio"></textarea>
-    <input type="text" name="entry.1719619062" id="gf_aperitivo_sabato">
-  </form>
-
   <script>
     // Anno corrente
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -530,11 +513,6 @@
     const successNameSpan = document.getElementById('success-name');
     const resetBtn = document.getElementById('reset-rsvp-btn');
 
-    const gfForm = document.getElementById('gf-form');
-    const gfIframe = document.getElementById('gf-iframe');
-
-    let pendingSubmit = false;
-     
     // Validazione in tempo reale
     const inputs = form.querySelectorAll('input, select, textarea');
     inputs.forEach(input => {
@@ -602,18 +580,7 @@
       }
     }
 
-    // Quando l'iframe carica dopo il POST, consideriamo la submission completata
-    gfIframe.addEventListener('load', () => {
-      if (!pendingSubmit) return;
-      pendingSubmit = false;
-      setLoading(false);
-      const nome = document.getElementById('nome').value.trim();
-      showSuccessMessage(nome);
-      // Rimuove la bozza e resetta i campi (ma li terrà nascosti, vengono puliti al reset)
-      localStorage.removeItem('rsvpDraft');
-    });
-
-    // Invio del form
+    // Invio del form - NUOVO SISTEMA AFFIDABILE CON GOOGLE APPS SCRIPT
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -643,34 +610,43 @@
         return;
       }
 
-      // Popola il form nascosto (Google Forms)
-      document.getElementById('gf_nome').value = document.getElementById('nome').value.trim();
-      document.getElementById('gf_cognome').value = document.getElementById('cognome').value.trim();
-      document.getElementById('gf_email').value = (document.getElementById('email').value || '').trim();
-      document.getElementById('gf_telefono').value = (document.getElementById('telefono').value || '').trim();
-      document.getElementById('gf_numero_adulti').value = document.getElementById('numero_adulti').value;
-      document.getElementById('gf_numero_bambini').value = document.getElementById('numero_bambini').value;
-      document.getElementById('gf_partecipazione').value = document.getElementById('partecipazione').value;
-      document.getElementById('gf_note').value = (document.getElementById('note').value || '').trim();
-      document.getElementById('gf_messaggio').value = (document.getElementById('messaggio').value || '').trim();
-      document.getElementById('gf_aperitivo_sabato').value = document.getElementById('aperitivo_sabato').value;
+      // Raccoglie i dati dal form
+      const data = {
+        nome: document.getElementById('nome').value.trim(),
+        cognome: document.getElementById('cognome').value.trim(),
+        email: document.getElementById('email').value.trim() || '',
+        telefono: document.getElementById('telefono').value.trim() || '',
+        numero_adulti: document.getElementById('numero_adulti').value,
+        numero_bambini: document.getElementById('numero_bambini').value,
+        partecipazione: document.getElementById('partecipazione').value,
+        note: document.getElementById('note').value.trim() || '',
+        messaggio: document.getElementById('messaggio').value.trim() || '',
+        aperitivo_sabato: document.getElementById('aperitivo_sabato').value
+      };
 
-      // Invio
-      pendingSubmit = true;
       setLoading(true);
 
-      // Submit reale su Google Forms
-      gfForm.submit();
+      // URL del tuo Google Apps Script (fornito da te)
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1Zil3o76aHohXlPGNOnXwfoMSlpldTKz89WBkGrwy5K16siMEvXqqbgVtNlZ0iBsF/exec';
 
-      // Fallback (se l'iframe non carica mai)
-      setTimeout(() => {
-        if (!pendingSubmit) return;
-        pendingSubmit = false;
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
         setLoading(false);
-        const nome = document.getElementById('nome').value.trim();
+        const nome = data.nome;
         showSuccessMessage(nome);
         localStorage.removeItem('rsvpDraft');
-      }, 2500);
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Errore invio:', error);
+        setLoading(false);
+        alert('Si è verificato un errore durante l\'invio. Per favore riprova o contattaci direttamente.');
+      });
     });
 
     // Pulsante per inviare una nuova richiesta
